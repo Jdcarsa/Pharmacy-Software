@@ -1,7 +1,7 @@
 /*------------- create contract ----------*/
 DELIMITER $
 create trigger createContractTrigger 
-before insert on Employee for each row
+after insert on Employee for each row
 begin
 	DECLARE id int;
     declare cod varchar(11);
@@ -14,9 +14,9 @@ begin
     SET cod = CONCAT('Ctra-', LPAD(id , 3, '0'));
     
     INSERT INTO `pharmacy`.`contract`(`idContract`,`idEmployee`,`nameEmployee`,
-	`contractDate`,`contractEnd`,`salary`)
+	`contractDate`,`contractEnd`,`salary` , `statusContract`)
 	VALUES (cod,new.idEmployee, CONCAT(new.nameEmployee, ' ' , 
-    new.lastNameEmployee),NOW(),(NOW() + INTERVAL 6 MONTH) , salary );
+    new.lastName),NOW(),(NOW() + INTERVAL 6 MONTH) , salary, 'Active' );
 
 end $
 /*------------- create contract ----------*/

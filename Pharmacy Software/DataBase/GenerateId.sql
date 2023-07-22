@@ -32,7 +32,7 @@ create trigger generateIdPatientTrigger
 before insert on Patient  for each row
 begin
 	DECLARE id  INT;
-    SET id  = (SELECT COUNT(*) FROM Product) + 1;
+    SET id  = (SELECT COUNT(*) FROM Patient) + 1;
     SET NEW.idPatient  = generarateId('Pte-',id);
 end $
 /*---------generate id -------*/
@@ -90,7 +90,7 @@ end $
 
 
 
-/*---------generate id patient-------*/
+/*---------generate id purchase-------*/
 
 DELIMITER $
 create trigger generateIdPurchaseTrigger 
@@ -104,7 +104,7 @@ end $
 
 
 
-/*---------generate id patient-------*/
+/*---------generate id clinicHistorygenerateIdPatientTrigger-------*/
 /* sales check , detailsales ,  */
 DELIMITER $
 create trigger generateIdClinicHistoryTrigger 

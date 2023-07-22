@@ -1,7 +1,7 @@
 /*---------create user employee-----*/
 DELIMITER $
 create trigger createUserEmployeeTrigger 
-before insert on Employee for each row
+after insert on Employee for each row
 begin
 	DECLARE id int;
     declare cod varchar(11);    
@@ -12,7 +12,7 @@ begin
     INSERT INTO `pharmacy`.`useremployee`(`idUser`,`nameUser`,`employeeUser`,
 	`passwordUser`,`typeUser`,`stateUser`,`idEmployee`)
 	VALUES (cod, CONCAT(new.nameEmployee, ' ' , 
-    new.lastNameEmployee),generarateUser(new.lastNameEmployee,cod)
+    new.lastName),generarateUser(new.lastName,cod)
     ,generaratePassword(),new.job,
     'Active', new.idEmployee );
 

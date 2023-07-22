@@ -27,7 +27,7 @@ DELIMITER $
 CREATE FUNCTION generarateUser(pLastName varchar(30) , 
 			pCod varchar(11)) RETURNS VARCHAR(20) DETERMINISTIC
 BEGIN
-    RETURN CONCAT(pCod,SUBSTRING_INDEX(lastNameEmployee, ' ', 1));
+    RETURN CONCAT(pCod,SUBSTRING_INDEX(pLastName, ' ', 1));
 END $
 
 /*-------------Generate user -------*/
