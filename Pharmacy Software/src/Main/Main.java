@@ -2,6 +2,8 @@
 package Main;
 
 import DataBase.ConnectionDB;
+import UI.AdminUI;
+import UI.SalesUI;
 import UI.Login;
 
 
@@ -27,7 +29,7 @@ public class Main extends javax.swing.JFrame {
         }
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new AdminUI().setVisible(true);
             }
         });
         
