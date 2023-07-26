@@ -4,18 +4,31 @@
  */
 package UI.Crud.Create;
 
+import Controller.ControllerLaboratory;
+import Controller.ControllerPresentation;
+import Controller.ControllerProduct;
+import Model.Product;
+import Model.Util;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ideapad330S
  */
 public class RegisterProduct extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form RegisterProduct
-     */
+    private ControllerProduct controllerPro = new ControllerProduct();
+    private ControllerLaboratory controllerLab = new ControllerLaboratory();
+    private ControllerPresentation controllerPre = new ControllerPresentation();
+    private Util u = new Util();
+
     public RegisterProduct() {
         initComponents();
-        this.setLocation(280, 110);
+        this.setLocation(280, 70);
     }
 
     /**
@@ -31,15 +44,15 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        nameTF = new javax.swing.JTextField();
+        labCB = new javax.swing.JComboBox<>();
+        presentationCB = new javax.swing.JComboBox<>();
+        expDateDT = new com.toedter.calendar.JDateChooser();
+        contratiTF = new javax.swing.JTextField();
+        healhtRegTF = new javax.swing.JTextField();
+        costTF = new javax.swing.JTextField();
+        stockTF = new javax.swing.JTextField();
+        priceTF = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -49,10 +62,33 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("Register Products");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -68,92 +104,195 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 773, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 248, 880, 130));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Register Products");
+        jLabel4.setText("Laboratories");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(297, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(371, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(277, 277, 277))
+                .addGap(366, 366, 366))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+                .addGap(0, 9, Short.MAX_VALUE)
                 .addComponent(jLabel4))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 773, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 129, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 880, 40));
+        getContentPane().add(nameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 129, -1));
 
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
+        getContentPane().add(labCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
 
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, -1));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 129, -1));
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 100, -1));
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 100, -1));
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 82, -1));
-        getContentPane().add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 100, -1));
+        getContentPane().add(presentationCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, -1, -1));
+        getContentPane().add(expDateDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
+        getContentPane().add(contratiTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 129, -1));
+        getContentPane().add(healhtRegTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, 100, -1));
+        getContentPane().add(costTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, 100, -1));
+        getContentPane().add(stockTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 82, -1));
+        getContentPane().add(priceTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, 100, -1));
 
         jLabel5.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel5.setText("Name");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 48, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 48, -1));
 
         jLabel6.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel6.setText("Stock");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel7.setText("Concentration");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel8.setText("Cost");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel9.setText("Price");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel10.setText("Presentation");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel11.setText("Laboratory");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel12.setText("Exp Date");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel13.setText("Healht Register");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(102, 255, 102));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Register");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 480, 140, 30));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 880, 180));
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 255));
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Register Products");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(325, 325, 325))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jLabel14))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 880, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 160, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 880, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fDate = sdf.format(expDateDT.getDate());
+        Product p = new Product(u.capitalize(nameTF.getText()), contratiTF.getText(), stockTF.getText(),
+                costTF.getText(), priceTF.getText(), healhtRegTF.getText(), fDate, labCB.getSelectedItem().toString());
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            controllerPro.registerProduct(p, presentationCB.getSelectedItem().toString());
+            controllerPro.getAllProducts(model);
+            this.jTable2.setModel(model);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.jTable2.setEnabled(false);
+        this.jTable1.setEnabled(false);
+        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel modelT = new DefaultTableModel();
+        try {
+            controllerLab.getAllLaboratory(model);
+            controllerPro.getAllProducts(modelT);
+            controllerLab.addIdLabCb(labCB);
+            controllerPre.addIdPresentationCb(presentationCB);
+            this.jTable1.setModel(model);
+            this.jTable2.setModel(modelT);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_formInternalFrameOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JTextField contratiTF;
+    private javax.swing.JTextField costTF;
+    private com.toedter.calendar.JDateChooser expDateDT;
+    private javax.swing.JTextField healhtRegTF;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -161,13 +300,16 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JComboBox<String> labCB;
+    private javax.swing.JTextField nameTF;
+    private javax.swing.JComboBox<String> presentationCB;
+    private javax.swing.JTextField priceTF;
+    private javax.swing.JTextField stockTF;
     // End of variables declaration//GEN-END:variables
 }

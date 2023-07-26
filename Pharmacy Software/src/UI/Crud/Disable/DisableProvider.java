@@ -4,9 +4,8 @@
  */
 package UI.Crud.Disable;
 
-import UI.Crud.Search.*;
-import Controller.ControllerProduct;
-import UI.SalesUI;
+
+import Controller.ControllerProvider;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,9 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DisableProvider extends javax.swing.JInternalFrame {
 
-    private final JLabel lb;
-    private final SalesUI emp;
-    private ControllerProduct product = new ControllerProduct();
+    private  JLabel lb;
+    private ControllerProvider controller = new ControllerProvider();
 
     /**
      * Creates new form SearchProducts
@@ -29,12 +27,17 @@ public class DisableProvider extends javax.swing.JInternalFrame {
      * @param lb
      * @param emp
      */
-    public DisableProvider(JLabel lb, SalesUI emp) {
+    public DisableProvider(JLabel lb) {
         initComponents();
         setLocation(300, 200);
         this.toFront();
-        this.lb = lb;
-        this.emp = emp;        
+        this.lb = lb;       
+    }
+    
+        public DisableProvider() {
+        initComponents();
+        setLocation(300, 200);
+        this.toFront();       
     }
 
     /**
@@ -55,6 +58,7 @@ public class DisableProvider extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(226, 221, 221));
         setClosable(true);
@@ -134,28 +138,39 @@ public class DisableProvider extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setText("Disable");
-        jButton1.setContentAreaFilled(false);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 80, 130, -1));
+
+        jLabel7.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel7.setText("Identification");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 100, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        if(lb!=null)
         lb.setVisible(true);
-        emp.existsPanel = false;
+        
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            product.getAllProducts(model);
+            controller.getAllProvider(model);
             this.jTable2.setModel(model);
+            controller.addIdProiverCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -170,7 +185,7 @@ public class DisableProvider extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            product.searchProducts(model, this.search.getText().trim());
+            controller.searchProvider(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,6 +194,20 @@ public class DisableProvider extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_searchKeyReleased
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try {
+            controller.disableProvider(jComboBox1.getSelectedItem().toString());
+            DefaultTableModel model = new DefaultTableModel();
+            controller.getAllProvider(model);
+            this.jTable2.setModel(model);
+            this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -186,6 +215,7 @@ public class DisableProvider extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;

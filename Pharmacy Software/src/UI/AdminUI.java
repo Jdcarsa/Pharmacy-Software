@@ -6,6 +6,7 @@ import UI.Crud.Search.*;
 import java.awt.Color;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import javax.swing.ImageIcon;
+import UI.Crud.Disable.*;
 
 /**
  *
@@ -78,7 +79,7 @@ public class AdminUI extends javax.swing.JFrame {
         jSeparator27 = new javax.swing.JPopupMenu.Separator();
         searchEmployee = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
-        disableLaboratory = new javax.swing.JMenuItem();
+        searchLab = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin");
@@ -354,6 +355,11 @@ public class AdminUI extends javax.swing.JFrame {
         disableProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-shipping-32.png"))); // NOI18N
         disableProvider.setText("Provider");
         disableProvider.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disableProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableProviderActionPerformed(evt);
+            }
+        });
         disable.add(disableProvider);
         disable.add(jSeparator23);
 
@@ -434,16 +440,16 @@ public class AdminUI extends javax.swing.JFrame {
         search.add(searchEmployee);
         search.add(jSeparator8);
 
-        disableLaboratory.setFont(new java.awt.Font("Sitka Text", 0, 16)); // NOI18N
-        disableLaboratory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-industry-32.png"))); // NOI18N
-        disableLaboratory.setText("Laboratory");
-        disableLaboratory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        disableLaboratory.addActionListener(new java.awt.event.ActionListener() {
+        searchLab.setFont(new java.awt.Font("Sitka Text", 0, 16)); // NOI18N
+        searchLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-industry-32.png"))); // NOI18N
+        searchLab.setText("Laboratory");
+        searchLab.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        searchLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                disableLaboratoryActionPerformed(evt);
+                searchLabActionPerformed(evt);
             }
         });
-        search.add(disableLaboratory);
+        search.add(searchLab);
 
         jMenuBar1.add(search);
 
@@ -548,11 +554,11 @@ public class AdminUI extends javax.swing.JFrame {
         productsFrame.setVisible(true);
     }//GEN-LAST:event_searchProductActionPerformed
 
-    private void disableLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableLaboratoryActionPerformed
+    private void searchLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLabActionPerformed
         SearchLab labFrame = new SearchLab();
         this.jDesktopPane1.add(labFrame);
         labFrame.setVisible(true);
-    }//GEN-LAST:event_disableLaboratoryActionPerformed
+    }//GEN-LAST:event_searchLabActionPerformed
 
     private void searchPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPresentationActionPerformed
         SearchPresentation pFrame = new SearchPresentation();
@@ -561,7 +567,9 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchPresentationActionPerformed
 
     private void searchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchEmployeeActionPerformed
-        // TODO add your handling code here:
+        SearchEmployee empFrame = new SearchEmployee();
+        this.jDesktopPane1.add(empFrame);
+        empFrame.setVisible(true);
     }//GEN-LAST:event_searchEmployeeActionPerformed
 
     private void searchProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProviderActionPerformed
@@ -570,12 +578,17 @@ public class AdminUI extends javax.swing.JFrame {
         pFrame.setVisible(true);
     }//GEN-LAST:event_searchProviderActionPerformed
 
+    private void disableProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProviderActionPerformed
+        DisableProvider disablePro = new DisableProvider();
+        this.jDesktopPane1.add(disablePro);
+        disablePro.setVisible(true);
+    }//GEN-LAST:event_disableProviderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton detailsBtn;
     private javax.swing.JMenu disable;
     private javax.swing.JMenuItem disableEmployee;
-    private javax.swing.JMenuItem disableLaboratory;
     private javax.swing.JMenuItem disableLaboratory1;
     private javax.swing.JMenuItem disablePresentation;
     private javax.swing.JMenuItem disableProduct;
@@ -615,6 +628,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton salesBtn3;
     private javax.swing.JMenu search;
     private javax.swing.JMenuItem searchEmployee;
+    private javax.swing.JMenuItem searchLab;
     private javax.swing.JMenuItem searchPresentation;
     private javax.swing.JMenuItem searchProduct;
     private javax.swing.JMenuItem searchProvider;

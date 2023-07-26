@@ -1,27 +1,27 @@
 
 package Model;
 
-import java.util.Date;
+
 
 
 public class Product {
     
     private String descriptionProduct;
     private String concentration;
-    private int stock;
-    private float cost;
-    private float salePrice;
+    private String stock;
+    private String cost;
+    private String salePrice;
     private String healthRegister;
-    private Date expirationDate;
+    private String expirationDate;
     private String statusProduct = "Active";
-    private String presentation;
-    private String laboratory;
+    private String idPresentation;
+    private String idLaboratory;
 
     public Product() {
     }
 
-    public Product(String descriptionProduct, String concentration, int stock, float cost, 
-            float salePrice, String healthRegister, Date expirationDate,  String presentation, String laboratory) {
+    public Product(String descriptionProduct, String concentration, String stock, String cost, String salePrice, 
+            String healthRegister, String expirationDate, String idLaboratory) {
         this.descriptionProduct = descriptionProduct;
         this.concentration = concentration;
         this.stock = stock;
@@ -29,9 +29,10 @@ public class Product {
         this.salePrice = salePrice;
         this.healthRegister = healthRegister;
         this.expirationDate = expirationDate;
-        this.presentation = presentation;
-        this.laboratory = laboratory;
+        this.idLaboratory = idLaboratory;
     }
+
+
 
     public String getDescriptionProduct() {
         return descriptionProduct;
@@ -49,29 +50,41 @@ public class Product {
         this.concentration = concentration;
     }
 
-    public int getStock() {
+    public String getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(String stock) {
         this.stock = stock;
     }
 
-    public float getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public float getSalePrice() {
+    public String getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(float salePrice) {
+    public void setSalePrice(String salePrice) {
         this.salePrice = salePrice;
     }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+
+
+
 
     public String getHealthRegister() {
         return healthRegister;
@@ -81,13 +94,7 @@ public class Product {
         this.healthRegister = healthRegister;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
+ 
 
     public String getStatusProduct() {
         return statusProduct;
@@ -97,20 +104,20 @@ public class Product {
         this.statusProduct = statusProduct;
     }
 
-    public String getPresentation() {
-        return presentation;
+    public String getIdPresentation() {
+        return idPresentation;
     }
 
-    public void setPresentation(String presentation) {
-        this.presentation = presentation;
+    public void setIdPresentation(String idPresentation) {
+        this.idPresentation = idPresentation;
     }
 
-    public String getLaboratory() {
-        return laboratory;
+    public String getIdLaboratory() {
+        return idLaboratory;
     }
 
-    public void setLaboratory(String laboratory) {
-        this.laboratory = laboratory;
+    public void setIdLaboratory(String idLaboratory) {
+        this.idLaboratory = idLaboratory;
     }
     
     

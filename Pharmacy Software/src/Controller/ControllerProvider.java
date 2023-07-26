@@ -5,6 +5,7 @@ import DataBase.executeProcedure;
 import DataBase.executeSmtDb;
 import Model.Provider;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,5 +36,18 @@ public class ControllerProvider {
                 + "Bank, numAccount, stateProvider'", values)) {
             JOptionPane.showMessageDialog(null, "Registered Provider");
         }
+    }
+    
+    public void disableProvider(String id ) throws ClassNotFoundException, SQLException{
+         executeProcedure exc = new executeProcedure();
+          id = "'" +id + "'";
+        if (exc.executeDisableProcedure("'Provider'", "'stateProvider'" ,"'numIdentification'" , id)) {
+            JOptionPane.showMessageDialog(null, "Disabled Provider");
+        }
+    }
+    
+    public void addIdProiverCb(JComboBox cb) throws ClassNotFoundException, SQLException{
+        executeSmtDb exc = new executeSmtDb();
+        exc.executeSmtSelect("Select numIdentification from pharmacy.Provider where stateProvider like 'Active' ","numIdentification" ,cb );
     }
 }

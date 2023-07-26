@@ -20,7 +20,6 @@ public class ConnectionDB {
          try{
              Class.forName("com.mysql.cj.jdbc.Driver");
              conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","mysql");
-             System.out.println("Connecto To MySQL");
          } catch(SQLException ex){
              System.out.println("Error al conectar con la base de datos");
             ex.printStackTrace();
