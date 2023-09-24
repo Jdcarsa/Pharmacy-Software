@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -55,17 +57,38 @@ public class executeSmtDb {
 
     public String executeSmtSelect(String statement, String columnName) throws ClassNotFoundException, SQLException {
         conexion.connect();
-        String value ="";
+        String value = "";
         try {
             Statement stmt = conexion.getConexion().createStatement();
             ResultSet rs = stmt.executeQuery(statement);
             while (rs.next()) {
-             value = rs.getString(columnName);
+                value = rs.getString(columnName);
             }
             conexion.desconnect();
             return value;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "An error has occurred!" +ex);
+            JOptionPane.showMessageDialog(null, "An error has occurred!" + ex);
+            return value;
+        }
+    }
+
+    public List executeSmtSelect(String statement) throws ClassNotFoundException, SQLException {
+        conexion.connect();
+        List<String> value = new ArrayList<>();
+        try {
+            Statement stmt = conexion.getConexion().createStatement();
+            ResultSet rs = stmt.executeQuery(statement);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    value.add(rs.getString(i));
+                }
+            }
+            conexion.desconnect();
+            return value;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "An error has occurred!" + ex);
             return value;
         }
     }

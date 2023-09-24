@@ -1,12 +1,12 @@
 package UI;
 
-
 import UI.Crud.Create.*;
 import UI.Crud.Search.*;
 import java.awt.Color;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import javax.swing.ImageIcon;
 import UI.Crud.Disable.*;
+import UI.Crud.Update.*;
 
 /**
  *
@@ -312,6 +312,11 @@ public class AdminUI extends javax.swing.JFrame {
         updateProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-shipping-32.png"))); // NOI18N
         updateProvider.setText("Provider");
         updateProvider.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updateProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProviderActionPerformed(evt);
+            }
+        });
         update.add(updateProvider);
         update.add(jSeparator14);
 
@@ -319,6 +324,11 @@ public class AdminUI extends javax.swing.JFrame {
         updatePresentation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-pills-bottle-32.png"))); // NOI18N
         updatePresentation.setText("Presentation");
         updatePresentation.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updatePresentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePresentationActionPerformed(evt);
+            }
+        });
         update.add(updatePresentation);
         update.add(jSeparator15);
 
@@ -326,6 +336,11 @@ public class AdminUI extends javax.swing.JFrame {
         updateEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-medical-support-32.png"))); // NOI18N
         updateEmployee.setText("Employee");
         updateEmployee.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeActionPerformed(evt);
+            }
+        });
         update.add(updateEmployee);
         update.add(jSeparator6);
 
@@ -333,6 +348,11 @@ public class AdminUI extends javax.swing.JFrame {
         updateLaboratory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-industry-32.png"))); // NOI18N
         updateLaboratory.setText("Laboratory");
         updateLaboratory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updateLaboratory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateLaboratoryActionPerformed(evt);
+            }
+        });
         update.add(updateLaboratory);
 
         jMenuBar1.add(update);
@@ -343,11 +363,21 @@ public class AdminUI extends javax.swing.JFrame {
         disable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disable.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         disable.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableActionPerformed(evt);
+            }
+        });
 
         disableProduct.setFont(new java.awt.Font("Sitka Text", 0, 16)); // NOI18N
         disableProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-pills-32.png"))); // NOI18N
         disableProduct.setText("Product");
         disableProduct.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disableProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableProductActionPerformed(evt);
+            }
+        });
         disable.add(disableProduct);
         disable.add(jSeparator22);
 
@@ -367,6 +397,11 @@ public class AdminUI extends javax.swing.JFrame {
         disablePresentation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-pills-bottle-32.png"))); // NOI18N
         disablePresentation.setText("Presentation");
         disablePresentation.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disablePresentation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disablePresentationActionPerformed(evt);
+            }
+        });
         disable.add(disablePresentation);
         disable.add(jSeparator24);
 
@@ -374,6 +409,11 @@ public class AdminUI extends javax.swing.JFrame {
         disableEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-medical-support-32.png"))); // NOI18N
         disableEmployee.setText("Employee");
         disableEmployee.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disableEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableEmployeeActionPerformed(evt);
+            }
+        });
         disable.add(disableEmployee);
         disable.add(jSeparator7);
 
@@ -381,6 +421,11 @@ public class AdminUI extends javax.swing.JFrame {
         disableLaboratory1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-industry-32.png"))); // NOI18N
         disableLaboratory1.setText("Laboratory");
         disableLaboratory1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        disableLaboratory1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disableLaboratory1ActionPerformed(evt);
+            }
+        });
         disable.add(disableLaboratory1);
 
         jMenuBar1.add(disable);
@@ -548,7 +593,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerEmployeeActionPerformed
 
     private void searchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductActionPerformed
-
         SearchProducts productsFrame = new SearchProducts();
         this.jDesktopPane1.add(productsFrame);
         productsFrame.setVisible(true);
@@ -583,6 +627,58 @@ public class AdminUI extends javax.swing.JFrame {
         this.jDesktopPane1.add(disablePro);
         disablePro.setVisible(true);
     }//GEN-LAST:event_disableProviderActionPerformed
+
+    private void disablePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disablePresentationActionPerformed
+        DisablePresentation disablePre = new DisablePresentation();
+        this.jDesktopPane1.add(disablePre);
+        disablePre.setVisible(true);
+    }//GEN-LAST:event_disablePresentationActionPerformed
+
+    private void disableProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProductActionPerformed
+        DisableProduct disablePro = new DisableProduct();
+        this.jDesktopPane1.add(disablePro);
+        disablePro.setVisible(true);
+    }//GEN-LAST:event_disableProductActionPerformed
+
+    private void disableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableActionPerformed
+
+    }//GEN-LAST:event_disableActionPerformed
+
+    private void disableEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableEmployeeActionPerformed
+        DisableEmployee disableEmp = new DisableEmployee();
+        this.jDesktopPane1.add(disableEmp);
+        disableEmp.setVisible(true);
+    }//GEN-LAST:event_disableEmployeeActionPerformed
+
+    private void disableLaboratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableLaboratory1ActionPerformed
+        DisableLab disableLab = new DisableLab();
+        this.jDesktopPane1.add(disableLab);
+        disableLab.setVisible(true);
+    }//GEN-LAST:event_disableLaboratory1ActionPerformed
+
+    private void updatePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePresentationActionPerformed
+        UpdatePresentation updatePre = new UpdatePresentation();
+        this.jDesktopPane1.add(updatePre);
+        updatePre.setVisible(true);
+    }//GEN-LAST:event_updatePresentationActionPerformed
+
+    private void updateLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLaboratoryActionPerformed
+        UpdateLab updateLab = new UpdateLab();
+        this.jDesktopPane1.add(updateLab);
+        updateLab.setVisible(true);
+    }//GEN-LAST:event_updateLaboratoryActionPerformed
+
+    private void updateProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProviderActionPerformed
+        UpdateProvider updatePro = new UpdateProvider();
+        this.jDesktopPane1.add(updatePro);
+        updatePro.setVisible(true);
+    }//GEN-LAST:event_updateProviderActionPerformed
+
+    private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
+       UpdateEmployee updateE = new UpdateEmployee();
+        this.jDesktopPane1.add(updateE);
+        updateE.setVisible(true);
+    }//GEN-LAST:event_updateEmployeeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

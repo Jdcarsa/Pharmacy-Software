@@ -1,6 +1,5 @@
 package DataBase;
 
-
 import java.sql.SQLException;
 import java.sql.CallableStatement;
 import javax.swing.JOptionPane;
@@ -27,10 +26,26 @@ public class executeProcedure {
     }
 
     public boolean executeDisableProcedure(String table, String nameColumn, String nameColumnId,
-             String values) throws ClassNotFoundException, SQLException {
+            String values) throws ClassNotFoundException, SQLException {
         conexion.connect();
         try {
-            String call = "{ call pharmacy.disableAnyData(" + table + "," + nameColumn + ","  + nameColumnId + "," + values + ")  }";
+            String call = "{ call pharmacy.disableAnyData(" + table + "," + nameColumn + "," + nameColumnId + "," + values + ")  }";
+            CallableStatement stmt = conexion.getConexion().prepareCall(call);
+            stmt.execute();
+            conexion.desconnect();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "An error has occurred!" + ex);
+            return false;
+        }
+    }
+
+    public boolean executeUpdateProcedure(String table,  String dataUpdates, String idColumn, String id)
+            throws ClassNotFoundException, SQLException {
+        conexion.connect();
+        try {
+            String call = "{ call pharmacy.updateAnyData(" + table + "," + dataUpdates 
+                    + "," + idColumn + "," + id + ")  }";
             CallableStatement stmt = conexion.getConexion().prepareCall(call);
             stmt.execute();
             conexion.desconnect();

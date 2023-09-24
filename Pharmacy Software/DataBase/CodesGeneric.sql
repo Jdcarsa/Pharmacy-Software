@@ -20,20 +20,27 @@ call insertAnyData('Presentation','descriptionPresentation, statePresentation'
     
     
 /*------------- Update ----------*/
+
 DELIMITER $
-CREATE PROCEDURE updateAnyData(IN nameTable VARCHAR(20), IN nameColumns text, 
+CREATE PROCEDURE updateAnyData(IN nameTable VARCHAR(20),  
 					IN dataUpdate TEXT, in nameColumnId  varchar(25)
                     ,IN pId varchar(11))
 BEGIN
-	SET @query = CONCAT('UPDATE ', nameTable, ' SET ', nameColumns, ' = ', 
-	dataUpdate, ' WHERE ', nameColumnId, ' = ''', pId, '''');
+	SET @query = CONCAT('UPDATE ', nameTable, ' SET ', dataUpdate, ' WHERE ', 
+	nameColumnId, ' = ''', pId, '''');
     PREPARE stmt FROM @query;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 END$ 
 
+
 call updateAnyData('Presentation','descriptionPresentation'
 	,'\'Capsule\'','idPresentation','Prst-001');
+    
+call updateAnyData('Laboratory','nameLaboratory = "Cruz", 
+address = "Arg" , phone = "132"', 'idLaboratory','Lab-003');
+
+call updateAnyData('Employee', 'nameEmployee = "Diego"', 'idEmployee' , 'Emp-001');
 /*------------- Update ----------*/
 
 
@@ -58,3 +65,7 @@ END $
 
 call disableAnyData('presentation','statePresentation'
 ,'idPresentation','Prst-001');
+
+
+call disableAnyData('employee','statusEmployee'
+,'idEmployee','Emp-001');

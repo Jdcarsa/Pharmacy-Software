@@ -91,11 +91,11 @@ create trigger updateDataEmployeeTrigger
 after update on Employee for each row
 	begin
 		update contract
-		set statusContract = employee.statusEmployee
+		set statusContract = new.statusEmployee
         where idEmployee = new.idEmployee;
         
         update userEmployee
-        set stateUser = employee.statusEmployee
+        set stateUser = new.statusEmployee
         where idEmployee = new.idEmployee;
     
 end  $

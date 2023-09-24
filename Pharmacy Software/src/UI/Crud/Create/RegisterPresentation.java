@@ -20,7 +20,7 @@ import Model.Util;
 public class RegisterPresentation extends javax.swing.JInternalFrame {
 
     private ControllerPresentation controller = new ControllerPresentation();
-    private Util u;
+    private Util u = new Util();
     public RegisterPresentation() {
         initComponents();
         this.setLocation(280, 110);
