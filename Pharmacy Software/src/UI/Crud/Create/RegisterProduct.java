@@ -4,9 +4,9 @@
  */
 package UI.Crud.Create;
 
-import Controller.ControllerLaboratory;
-import Controller.ControllerPresentation;
-import Controller.ControllerProduct;
+
+import Controller.IAddName;
+import Controller.IController;
 import Model.Product;
 import Model.Util;
 import java.sql.SQLException;
@@ -21,13 +21,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegisterProduct extends javax.swing.JInternalFrame {
 
-    private ControllerProduct controllerPro = new ControllerProduct();
-    private ControllerLaboratory controllerLab = new ControllerLaboratory();
-    private ControllerPresentation controllerPre = new ControllerPresentation();
-    private Util u = new Util();
+    private IController controllerPro;
+    private IController controllerLab;
+    private IAddName controllerPre;
+    private Util u;
 
-    public RegisterProduct() {
+    public RegisterProduct(Util u, IController controllerPro, IController controllerLab, IAddName controllerPre) {
         initComponents();
+        this.u = u;
+        this.controllerPro = controllerPro;
+        this.controllerLab = controllerLab;
+        this.controllerPre = controllerPre;
         this.setLocation(280, 70);
     }
 
@@ -248,15 +252,14 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String fDate = sdf.format(expDateDT.getDate());
         Product p = new Product(u.capitalize(nameTF.getText()), contratiTF.getText(), stockTF.getText(),
-                costTF.getText(), priceTF.getText(), healhtRegTF.getText(), fDate, labCB.getSelectedItem().toString());
+                costTF.getText(), priceTF.getText(), healhtRegTF.getText(), fDate,
+                presentationCB.getSelectedItem().toString(), labCB.getSelectedItem().toString());
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controllerPro.registerProduct(p, presentationCB.getSelectedItem().toString());
-            controllerPro.getAllProducts(model);
+            controllerPro.register(p);
+            controllerPro.getAll(model);
             this.jTable2.setModel(model);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -267,15 +270,13 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         DefaultTableModel modelT = new DefaultTableModel();
         try {
-            controllerLab.getAllLaboratory(model);
-            controllerPro.getAllProducts(modelT);
-            controllerLab.addIdLabCb(labCB);
-            controllerPre.addIdPresentationCb(presentationCB);
+            controllerLab.getAll(model);
+            controllerPro.getAll(modelT);
+            controllerLab.addIdCb(labCB);
+            controllerPre.addNameCb(presentationCB);
             this.jTable1.setModel(model);
             this.jTable2.setModel(modelT);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 

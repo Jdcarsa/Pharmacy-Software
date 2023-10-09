@@ -6,6 +6,7 @@ package UI.Crud.Create;
 
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerProvider;
+import Controller.IController;
 import Model.Provider;
 import Model.Util;
 import java.sql.SQLException;
@@ -18,10 +19,12 @@ import java.util.logging.Logger;
  */
 public class RegisterProvider extends javax.swing.JInternalFrame {
 
-    private ControllerProvider controller = new ControllerProvider();
-    private Util u = new Util();
+    private IController controller;
+    private Util u;
     
-    public RegisterProvider() {
+    public RegisterProvider(Util u, IController controller) {
+        this.u = u;
+        this.controller = controller;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -238,7 +241,7 @@ public class RegisterProvider extends javax.swing.JInternalFrame {
         this.jTable1.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAllProvider(model);
+            controller.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,8 +259,8 @@ public class RegisterProvider extends javax.swing.JInternalFrame {
         ,phoneTF.getText(),u.capitalize(bankTF.getText()),accountTF.getText());
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.registerProvider(provider);
-            controller.getAllProvider(model);
+            controller.register(provider);
+            controller.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterProvider.class.getName()).log(Level.SEVERE, null, ex);

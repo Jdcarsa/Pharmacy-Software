@@ -3,6 +3,7 @@ package UI.Crud.Disable;
 
 
 import Controller.ControllerEmployee;
+import Controller.IController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class DisableEmployee extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private ControllerEmployee controller = new ControllerEmployee();
+    private IController controller;
 
     /**
      * Creates new form SearchProducts
@@ -31,7 +32,8 @@ public class DisableEmployee extends javax.swing.JInternalFrame {
         this.lb = lb;       
     }
     
-        public DisableEmployee() {
+        public DisableEmployee(IController controller) {
+            this.controller = controller;
         initComponents();
         setLocation(300, 200);
         this.toFront();       
@@ -165,9 +167,9 @@ public class DisableEmployee extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllEmployee(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
-            controller.addIdEmployeeCb(this.jComboBox1);
+            controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -182,7 +184,7 @@ public class DisableEmployee extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.searchEmployee(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableEmployee.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,9 +195,9 @@ public class DisableEmployee extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            controller.disableEmployee(jComboBox1.getSelectedItem().toString());
+            controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllEmployee(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

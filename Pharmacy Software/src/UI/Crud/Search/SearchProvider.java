@@ -6,6 +6,7 @@ package UI.Crud.Search;
 
 import Controller.ControllerProduct;
 import Controller.ControllerProvider;
+import Controller.IController;
 import UI.SalesUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchProvider extends javax.swing.JInternalFrame {
 
-    private  JLabel lb;
-    private ControllerProvider provider = new ControllerProvider();
+    private JLabel lb;
+    private IController controller;
 
     /**
      * Creates new form SearchProducts
@@ -32,12 +33,13 @@ public class SearchProvider extends javax.swing.JInternalFrame {
         initComponents();
         setLocation(300, 200);
         this.toFront();
-        this.lb = lb;       
+        this.lb = lb;
     }
-    
-        public SearchProvider() {
+
+    public SearchProvider(IController controller) {
+        this.controller = controller;
         initComponents();
-        setLocation(300, 200);     
+        setLocation(300, 200);
     }
 
     /**
@@ -139,16 +141,17 @@ public class SearchProvider extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        if(lb!=null)
-        lb.setVisible(true);
-        
+        if (lb != null) {
+            lb.setVisible(true);
+        }
+
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            provider.getAllProvider(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,9 +165,9 @@ public class SearchProvider extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
-               try {
+        try {
             DefaultTableModel model = new DefaultTableModel();
-            provider.searchProvider(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProvider.class.getName()).log(Level.SEVERE, null, ex);

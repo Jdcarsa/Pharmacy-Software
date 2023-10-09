@@ -10,13 +10,14 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class executeSmtDb {
+public class executeSmtDb implements IExecuteSmtDb {
 
-    private final ConnectionDB conexion = new ConnectionDB();
+    private final ConnectionDB conexion = ConnectionDB.getInstance();
 
     public executeSmtDb() {
     }
 
+    @Override
     public void executeSmtSelect(String statement, DefaultTableModel model) throws ClassNotFoundException, SQLException {
         conexion.connect();
         try {
@@ -40,6 +41,7 @@ public class executeSmtDb {
         }
     }
 
+    @Override
     public void executeSmtSelect(String statement, String columnName, JComboBox cb) throws ClassNotFoundException, SQLException {
         conexion.connect();
         try {
@@ -55,6 +57,7 @@ public class executeSmtDb {
         }
     }
 
+    @Override
     public String executeSmtSelect(String statement, String columnName) throws ClassNotFoundException, SQLException {
         conexion.connect();
         String value = "";
@@ -72,6 +75,7 @@ public class executeSmtDb {
         }
     }
 
+    @Override
     public List executeSmtSelect(String statement) throws ClassNotFoundException, SQLException {
         conexion.connect();
         List<String> value = new ArrayList<>();

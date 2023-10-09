@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package UI.Crud.Create;
 
-import Controller.ControllerLaboratory;
+
+import Controller.IController;
 import Model.Laboratory;
 import Model.Util;
 import java.sql.SQLException;
@@ -18,11 +16,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegisterLab extends javax.swing.JInternalFrame {
 
-    private Util u = new Util();
-    private ControllerLaboratory controller = new ControllerLaboratory();
+    private Util u;
+    private IController controller;
 
-    public RegisterLab() {
+    public RegisterLab(Util u, IController controller) {
         initComponents();
+        this.u = u;
+        this.controller = controller;
         this.setLocation(280, 110);
     }
 
@@ -178,9 +178,9 @@ public class RegisterLab extends javax.swing.JInternalFrame {
             Laboratory lab = new Laboratory(u.capitalize(nameTF.getText())
                     ,u.capitalize(addressTF.getText()),u.capitalize(phoneTF.getText()));
         try {
-            controller.registerLaboratory(lab);
+            controller.register(lab);
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllLaboratory(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,7 +193,7 @@ public class RegisterLab extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAllLaboratory(model);
+            controller.getAll(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterLab.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

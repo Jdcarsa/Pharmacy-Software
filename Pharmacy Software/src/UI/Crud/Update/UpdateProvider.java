@@ -7,6 +7,8 @@ package UI.Crud.Update;
 import UI.Crud.Create.*;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerProvider;
+import Controller.IAddDataTF;
+import Controller.IController;
 import Model.Provider;
 import Model.Util;
 import java.sql.SQLException;
@@ -20,10 +22,14 @@ import javax.swing.JTextField;
  */
 public class UpdateProvider extends javax.swing.JInternalFrame {
 
-    private ControllerProvider controller = new ControllerProvider();
-    private Util u = new Util();
+    private IController controller;
+    private IAddDataTF addD;
+    private Util u;
 
-    public UpdateProvider() {
+    public UpdateProvider(Util u, IController controller, IAddDataTF addD) {
+        this.u = u;
+        this.controller = controller;
+        this.addD = addD;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -255,9 +261,9 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
         jComboBox1.insertItemAt("Select", 0);
         jComboBox1.setSelectedIndex(0);
         try {
-            controller.getAllProvider(model);
+            controller.getAll(model);
             this.jTable1.setModel(model);
-            controller.addIdProiver2Cb(jComboBox1);
+            controller.addIdCb(jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateProvider.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -273,10 +279,11 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
         Provider provider = new Provider(u.capitalize(nameTF.getText()),idTF.getText(),u.capitalize(addressTF.getText()),emailTF.getText()
         ,phoneTF.getText(),u.capitalize(bankTF.getText()),accountTF.getText());
         DefaultTableModel model = new DefaultTableModel();
-        String selectedItem = jComboBox1.getSelectedItem().toString();
+        String id = jComboBox1.getSelectedItem().toString();
+        provider.setId(id);
         try {
-            controller.updateProvider(provider, selectedItem);
-            controller.getAllProvider(model);
+            controller.update(provider);
+            controller.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,7 +297,7 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
             String selectedItem = jComboBox1.getSelectedItem().toString();
             JTextField[] textFields = {nameTF, idTF, addressTF, emailTF, phoneTF, bankTF, accountTF};
             try {
-                controller.addDataTFPro(selectedItem, textFields);
+                addD.addDataTF(selectedItem, textFields);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdateLab.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

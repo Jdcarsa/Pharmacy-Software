@@ -4,6 +4,7 @@ package Model;
 
 public class Provider {
     
+    private String id;
     private String nameProvider;
     private String numIdentification;
     private String address;
@@ -89,6 +90,15 @@ public class Provider {
     public void setStateProvider(String stateProvider) {
         this.stateProvider = stateProvider;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     
     
 }

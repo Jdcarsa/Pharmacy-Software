@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controller;
 
 import DataBase.executeProcedure;
@@ -18,24 +15,28 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ideapad330S
  */
-public class ControllerLaboratory {
+public class ControllerLaboratory implements IController, IAddDataTF {
 
     public ControllerLaboratory() {
     }
 
-    public void getAllLaboratory(DefaultTableModel model) throws ClassNotFoundException, SQLException {
+    @Override
+    public void getAll(DefaultTableModel model) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  idLaboratory, nameLaboratory, address , phone"
                 + " FROM pharmacy.Laboratory WHERE stateLaboratory = 'Active' ", model);
     }
 
-    public void searchLaboratory(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
+    @Override
+    public void search(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  idLaboratory, nameLaboratory, address , phone "
                 + " FROM pharmacy.Laboratory WHERE nameLaboratory LIKE" + "'%" + name + "%'" + "AND  stateLaboratory = 'Active' ", model);
     }
 
-    public void registerLaboratory(Laboratory lab) throws ClassNotFoundException, SQLException {
+    @Override
+    public void register(Object o) throws ClassNotFoundException, SQLException {
+        Laboratory lab = (Laboratory) o;
         executeProcedure exc = new executeProcedure();
         String values = "' \\'" + lab.getName() + "\\'" + " , \\'" + lab.getAddress() + "\\'" + " , \\'" + lab.getPhone() + "\\'"
                 + ", \\'" + lab.getStateLaboratory() + "\\' ' ";
@@ -44,12 +45,14 @@ public class ControllerLaboratory {
         }
     }
 
-    public void addIdLabCb(JComboBox cb) throws ClassNotFoundException, SQLException {
+    @Override
+    public void addIdCb(JComboBox cb) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("Select idLaboratory from pharmacy.Laboratory where stateLaboratory like 'Active' ", "idLaboratory", cb);
     }
 
-    public void disableLab(String id) throws ClassNotFoundException, SQLException {
+    @Override
+    public void disable(String id) throws ClassNotFoundException, SQLException {
         executeProcedure exc = new executeProcedure();
         id = "'" + id + "'";
         if (exc.executeDisableProcedure("'Laboratory", "'stateLaboratory'", "'idLaboratory'", id)) {
@@ -57,7 +60,8 @@ public class ControllerLaboratory {
         }
     }
 
-    public void addDataTFLab(String id, JTextField[] textFields) throws ClassNotFoundException, SQLException {
+   @Override
+    public void addDataTF(String id, JTextField[] textFields) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         List<String> value = exc.executeSmtSelect("Select nameLaboratory, address, phone from pharmacy.Laboratory "
                 + "where stateLaboratory like 'Active' and idLaboratory = '" + id + "'");
@@ -66,11 +70,13 @@ public class ControllerLaboratory {
         textFields[2].setText(value.get(2));
     }
 
-    public void updateLab(Laboratory lab, String id) throws ClassNotFoundException, SQLException {
+    @Override
+    public void update(Object o) throws ClassNotFoundException, SQLException {
+        Laboratory lab = (Laboratory) o;
         executeProcedure exc = new executeProcedure();
         String dataUpdate = "'nameLaboratory = "+ " \" " + lab.getName() +" \" "+ ", address = " 
                 + " \" " + lab.getAddress() +" \" "+  ", phone ="+ " \" " + lab.getPhone()+" \" " +"'";
-        id = "'" + id + "'";
+        String id = "'" + lab.getId() + "'";
         if (exc.executeUpdateProcedure("'Laboratory'", dataUpdate, "'idLaboratory'", id)) {
             JOptionPane.showMessageDialog(null, "Updated Laboratory");
         }

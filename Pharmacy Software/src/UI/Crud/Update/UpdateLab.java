@@ -6,6 +6,7 @@ package UI.Crud.Update;
 
 import UI.Crud.Create.*;
 import Controller.ControllerLaboratory;
+import Controller.IController;
 import Model.Laboratory;
 import Model.Util;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import Controller.IAddDataTF;
 
 /**
  *
@@ -20,10 +22,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class UpdateLab extends javax.swing.JInternalFrame {
 
-    private Util u = new Util();
-    private ControllerLaboratory controller = new ControllerLaboratory();
+    private Util u;
+    private IController controller;
+    private IAddDataTF addData;
 
-    public UpdateLab() {
+    public UpdateLab(Util u, IController controller,  IAddDataTF  addData) {
+        this.u = u;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -201,8 +205,8 @@ public class UpdateLab extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedIndex(0);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAllLaboratory(model);
-            controller.addIdLabCb(this.jComboBox1);
+            controller.getAll(model);
+            controller.addIdCb(this.jComboBox1);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,14 +217,15 @@ public class UpdateLab extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Laboratory lab = new Laboratory(u.capitalize(nameTF.getText()), u.capitalize(addressTF.getText()), phoneTF.getText());
-
+        
         try {
             if (jComboBox1.getSelectedIndex() > 0) {
-                String selectedItem = jComboBox1.getSelectedItem().toString();
-                controller.updateLab(lab, selectedItem);
+                String id = jComboBox1.getSelectedItem().toString();
+                Laboratory lab = new Laboratory(u.capitalize(nameTF.getText()), u.capitalize(addressTF.getText()), phoneTF.getText());
+                lab.setId(id);
+                controller.update(lab);
                 DefaultTableModel model = new DefaultTableModel();
-                controller.getAllLaboratory(model);
+                controller.getAll(model);
                 this.jTable2.setModel(model);
             }
         } catch (ClassNotFoundException ex) {
@@ -236,7 +241,7 @@ public class UpdateLab extends javax.swing.JInternalFrame {
             String selectedItem = jComboBox1.getSelectedItem().toString();
             JTextField[] textFields = {nameTF, addressTF, phoneTF};
             try {
-                controller.addDataTFLab(selectedItem, textFields);
+                addData.addDataTF(selectedItem, textFields);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdateLab.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

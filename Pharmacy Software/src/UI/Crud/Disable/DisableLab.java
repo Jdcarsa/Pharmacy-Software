@@ -3,6 +3,7 @@ package UI.Crud.Disable;
 
 
 import Controller.ControllerLaboratory;
+import Controller.IController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,25 +17,22 @@ import javax.swing.table.DefaultTableModel;
 public class DisableLab extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private ControllerLaboratory controller = new ControllerLaboratory();
+    private IController controller ;
 
-    /**
-     * Creates new form SearchProducts
-     *
-     * @param lb
-     * @param emp
-     */
-    public DisableLab(JLabel lb) {
+
+    public DisableLab(JLabel lb, IController controller) {
         initComponents();
         setLocation(300, 200);
         this.toFront();
         this.lb = lb;       
+        this.controller = controller;
     }
     
-        public DisableLab() {
+        public DisableLab(IController controller) {
         initComponents();
         setLocation(300, 200);
-        this.toFront();       
+        this.toFront();    
+         this.controller = controller;
     }
 
     /**
@@ -165,9 +163,9 @@ public class DisableLab extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllLaboratory(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
-            controller.addIdLabCb(this.jComboBox1);
+            controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableLab.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -182,7 +180,7 @@ public class DisableLab extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.searchLaboratory(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,9 +191,9 @@ public class DisableLab extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            controller.disableLab(jComboBox1.getSelectedItem().toString());
+            controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllLaboratory(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

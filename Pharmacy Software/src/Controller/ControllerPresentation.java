@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import DataBase.executeProcedure;
@@ -14,30 +10,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ideapad330S
- */
-public class ControllerPresentation {
+public class ControllerPresentation implements IController, IAddName, IAddDataTF  {
 
-    public ControllerPresentation() {
+    public ControllerPresentation ()
+    {
 
     }
 
-    public void getAllPresentation(DefaultTableModel model) throws ClassNotFoundException, SQLException {
+    @Override
+    public void getAll(DefaultTableModel model) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  idPresentation, descriptionPresentation"
                 + " FROM pharmacy.Presentation WHERE statePresentation = 'Active' ", model);
     }
 
-    public void searchPresentation(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
+    @Override
+    public void search(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  idPresentation, descriptionPresentation"
                 + " FROM pharmacy.PresentationWHERE statePresentation = 'Active' "
                 + "AND descriptionPresentation LIKE " + "'%" + name + "%'", model);
     }
 
-    public void registerPresentation(Presentation p) throws ClassNotFoundException, SQLException {
+    @Override
+    public void register(Object o) throws ClassNotFoundException, SQLException {
+        Presentation p = (Presentation) o;
         executeProcedure exc = new executeProcedure();
         String values = "' \\" + "'" + p.getDescriptionPresentation() + "\\" + "' , \\'" + p.getStatePresentation() + "\\' ' ";
         if (exc.executeInsertProcedure("'Presentation'", "'descriptionPresentation, statePresentation'", values)) {
@@ -45,19 +42,22 @@ public class ControllerPresentation {
         }
     }
 
-    public void addIdPresentationCb(JComboBox cb) throws ClassNotFoundException, SQLException {
+    @Override
+    public void addNameCb(JComboBox cb) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("Select descriptionPresentation from pharmacy.Presentation where statePresentation like 'Active' ",
                 "descriptionPresentation", cb);
     }
-    
-        public void addId2PresentationCb(JComboBox cb) throws ClassNotFoundException, SQLException {
+
+    @Override
+    public void addIdCb(JComboBox cb) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("Select idPresentation from pharmacy.Presentation where statePresentation like 'Active' ",
                 "idPresentation", cb);
     }
 
-    public void disablePresentation(String id) throws ClassNotFoundException, SQLException {
+    @Override
+    public void disable(String id) throws ClassNotFoundException, SQLException {
         executeProcedure exc = new executeProcedure();
         id = "'" + id + "'";
         if (exc.executeDisableProcedure("'Presentation'", "'statePresentation'", "'descriptionPresentation'", id)) {
@@ -65,18 +65,21 @@ public class ControllerPresentation {
         }
     }
 
-    public void addDataTFPresentation(String id, JTextField name) throws ClassNotFoundException, SQLException {
+     @Override
+    public void addDataTF(String id, JTextField[] textFields) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         List<String> value = exc.executeSmtSelect("Select descriptionPresentation from pharmacy.Presentation "
-                + "where statePresentation like 'Active' and idPresentation = '" +id +"'");
-        name.setText(value.get(0));
+                + "where statePresentation like 'Active' and idPresentation = '" + id + "'");
+        textFields[0].setText(value.get(0));
     }
-    
-        public void updatePresentation(Presentation p , String id) throws ClassNotFoundException, SQLException {
+
+    @Override
+    public void update(Object o) throws ClassNotFoundException, SQLException {
+        Presentation p = (Presentation) o;
         executeProcedure exc = new executeProcedure();
         String dataUpdate = "'descriptionPresentation =" + " \" " + p.getDescriptionPresentation() + "\" '";
-         id = "'" + id + "'";
-        if (exc.executeUpdateProcedure("'Presentation'", dataUpdate,"'idPresentation'", id )) {
+        String id = "'" + p.getId() + "'";
+        if (exc.executeUpdateProcedure("'Presentation'", dataUpdate, "'idPresentation'", id)) {
             JOptionPane.showMessageDialog(null, "Updated Presentation");
         }
     }

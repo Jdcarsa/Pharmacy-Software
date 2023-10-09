@@ -1,7 +1,8 @@
 
 package Main;
 
-import DataBase.ConnectionDB;
+
+import Model.Util;
 import UI.AdminUI;
 import UI.SalesUI;
 import UI.Login;
@@ -11,6 +12,7 @@ public class Main extends javax.swing.JFrame {
 
  
     public static void main(String[] args) throws ClassNotFoundException {
+         Util u = new Util();
                 try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -29,7 +31,7 @@ public class Main extends javax.swing.JFrame {
         }
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminUI().setVisible(true);
+                new AdminUI(u).setVisible(true);
             }
         });
         

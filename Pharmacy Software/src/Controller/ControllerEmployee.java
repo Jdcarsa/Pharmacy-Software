@@ -10,27 +10,28 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ideapad330S
- */
-public class ControllerEmployee {
+
+public class ControllerEmployee implements IController, IAddDataTFCB  {
 
     public ControllerEmployee() {
     }
 
-    public void getAllEmployee(DefaultTableModel model) throws ClassNotFoundException, SQLException {
+    @Override
+    public void getAll(DefaultTableModel model) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  *  FROM pharmacy.view_employee_user ", model);
     }
 
-    public void searchEmployee(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
+    @Override
+    public void search(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT  *  FROM pharmacy.view_employee_user "
                 + "  WHERE name LIKE" + "'%" + name + "%'", model);
     }
 
-    public void registerEmployee(Employee e) throws ClassNotFoundException, SQLException {
+    @Override
+    public void register(Object o) throws ClassNotFoundException, SQLException {
+        Employee e = (Employee) o;
         executeProcedure exc = new executeProcedure();
         String values = "' \\'" + e.getNameEmployee() + "\\'" + " , \\'" + e.getLastName() + "\\'" + " , \\'" + e.getJob() + "\\'"
                 + " , \\'" + e.getSex() + "\\'" + " , \\'" + e.getNumIdentification() + "\\'" + " , \\'" + e.getEmail() + "\\'"
@@ -42,8 +43,10 @@ public class ControllerEmployee {
         }
     }
     
-        public void updateEmployee(Employee e) throws ClassNotFoundException, SQLException {
+    @Override
+        public void update(Object o) throws ClassNotFoundException, SQLException {
         executeProcedure exc = new executeProcedure();
+        Employee e = (Employee) o;
         String dataUpdate = "'nameEmployee = "+ " \" " + e.getNameEmployee() +" \" "+ ", lastName = " 
                 + " \" " + e.getLastName() +" \" "+  ", job ="+ " \" " + e.getJob()+" \" "
                 +  ", sex ="+ " \" " + e.getSex()+" \" "+  ", email ="+ " \" " + e.getEmail()
@@ -54,13 +57,15 @@ public class ControllerEmployee {
         }
     }
     
-        public void addIdEmployeeCb(JComboBox cb) throws ClassNotFoundException, SQLException {
+    @Override
+        public void addIdCb(JComboBox cb) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("Select numIdentification from pharmacy.Employee"
                 + " where statusEmployee like 'Active' ", "numIdentification", cb);
     }
 
-    public void disableEmployee(String id) throws ClassNotFoundException, SQLException {
+    @Override
+    public void disable(String id) throws ClassNotFoundException, SQLException {
         executeProcedure exc = new executeProcedure();
         id = "'" + id + "'";
         if (exc.executeDisableProcedure("'pharmacy.Employee'","'statusEmployee'" , "'numIdentification'", id)) {
@@ -68,7 +73,8 @@ public class ControllerEmployee {
         }
     }
     
-        public void addDataTFLab(String id, JTextField[] textFields , JComboBox[] cbs) throws ClassNotFoundException, SQLException {
+    @Override
+        public void addDataTFCB(String id, JTextField[] textFields , JComboBox[] cbs) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         List<String> value = exc.executeSmtSelect("Select nameEmployee, lastName,"
                 + "email, phone, address, job, sex  from pharmacy.Employee "

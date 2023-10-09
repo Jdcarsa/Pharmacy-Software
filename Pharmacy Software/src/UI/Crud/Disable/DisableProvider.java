@@ -6,6 +6,7 @@ package UI.Crud.Disable;
 
 
 import Controller.ControllerProvider;
+import Controller.IController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class DisableProvider extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private ControllerProvider controller = new ControllerProvider();
+    private IController controller;
 
     /**
      * Creates new form SearchProducts
@@ -34,8 +35,9 @@ public class DisableProvider extends javax.swing.JInternalFrame {
         this.lb = lb;       
     }
     
-        public DisableProvider() {
+        public DisableProvider(IController controller) {
         initComponents();
+        this.controller = controller;
         setLocation(300, 200);
         this.toFront();       
     }
@@ -168,9 +170,9 @@ public class DisableProvider extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllProvider(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
-            controller.addIdProiverCb(this.jComboBox1);
+            controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -185,7 +187,7 @@ public class DisableProvider extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.searchProvider(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,9 +198,9 @@ public class DisableProvider extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            controller.disableProvider(jComboBox1.getSelectedItem().toString());
+            controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllProvider(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

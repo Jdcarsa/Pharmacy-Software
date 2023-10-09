@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.ControllerPresentation;
 import Model.Presentation;
 import Model.Util;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,9 +20,10 @@ import Model.Util;
 public class UpdatePresentation extends javax.swing.JInternalFrame {
 
     private ControllerPresentation controller = new ControllerPresentation();
-    private Util u = new Util();
+    private Util u;
 
-    public UpdatePresentation() {
+    public UpdatePresentation(Util u) {
+        this.u = u;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -177,9 +179,9 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedIndex(0);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllPresentation(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
-            controller.addId2PresentationCb(this.jComboBox1);
+            controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdatePresentation.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -191,10 +193,11 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
         Presentation presentation = new Presentation(u.capitalize(nameTF.getText()));
         try {
             if (jComboBox1.getSelectedIndex() > 0) {
-                String selectedItem = jComboBox1.getSelectedItem().toString();
-                controller.updatePresentation(presentation, selectedItem);
+                String id= jComboBox1.getSelectedItem().toString();
+                presentation.setId(id);
+                controller.update(presentation);
                 DefaultTableModel model = new DefaultTableModel();
-                controller.getAllPresentation(model);
+                controller.getAll(model);
                 this.jTable2.setModel(model);
             }
         } catch (ClassNotFoundException ex) {
@@ -208,7 +211,8 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
         if (jComboBox1.getSelectedIndex() > 0) {
             String selectedItem = jComboBox1.getSelectedItem().toString();
             try {
-                controller.addDataTFPresentation(selectedItem, nameTF);
+                JTextField[] textFields = {nameTF};
+                controller.addDataTF(selectedItem, textFields);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdatePresentation.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

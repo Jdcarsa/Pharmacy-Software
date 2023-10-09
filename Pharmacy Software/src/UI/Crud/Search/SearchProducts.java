@@ -5,6 +5,7 @@
 package UI.Crud.Search;
 
 import Controller.ControllerProduct;
+import Controller.IController;
 import UI.AdminUI;
 import UI.SalesUI;
 import java.sql.SQLException;
@@ -21,15 +22,7 @@ public class SearchProducts extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
     private  SalesUI emp;
-    private ControllerProduct product = new ControllerProduct();
-
-    /**
-     * Creates new form SearchProducts
-     *
-     * @param lb
-     * @param emp
-     */
-    
+    private IController product;    
         
     public SearchProducts(JLabel lb, SalesUI emp) {
         initComponents();
@@ -39,7 +32,8 @@ public class SearchProducts extends javax.swing.JInternalFrame {
         this.emp = emp;        
     }
 
-    public SearchProducts() {
+    public SearchProducts(IController product) {
+        this.product = product;
          initComponents();
         setLocation(300, 200);
     }
@@ -155,7 +149,7 @@ public class SearchProducts extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            product.getAllProducts(model);
+            product.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProducts.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,13 +159,13 @@ public class SearchProducts extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            product.searchProducts(model, this.search.getText().trim());
+            product.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProducts.class.getName()).log(Level.SEVERE, null, ex);

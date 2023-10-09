@@ -1,11 +1,8 @@
-
 package Model;
 
-
-
-
 public class Product {
-    
+
+    private String id;
     private String descriptionProduct;
     private String concentration;
     private String stock;
@@ -14,14 +11,14 @@ public class Product {
     private String healthRegister;
     private String expirationDate;
     private String statusProduct = "Active";
-    private String idPresentation;
+    private String namePresentation;
     private String idLaboratory;
 
     public Product() {
     }
 
-    public Product(String descriptionProduct, String concentration, String stock, String cost, String salePrice, 
-            String healthRegister, String expirationDate, String idLaboratory) {
+    public Product(String descriptionProduct, String concentration, String stock, String cost, String salePrice,
+            String healthRegister, String expirationDate, String namePresentation, String idLaboratory) {
         this.descriptionProduct = descriptionProduct;
         this.concentration = concentration;
         this.stock = stock;
@@ -29,11 +26,19 @@ public class Product {
         this.salePrice = salePrice;
         this.healthRegister = healthRegister;
         this.expirationDate = expirationDate;
+        this.namePresentation = namePresentation;
         this.idLaboratory = idLaboratory;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    
     public String getDescriptionProduct() {
         return descriptionProduct;
     }
@@ -82,10 +87,6 @@ public class Product {
         this.expirationDate = expirationDate;
     }
 
-
-
-
-
     public String getHealthRegister() {
         return healthRegister;
     }
@@ -93,8 +94,6 @@ public class Product {
     public void setHealthRegister(String healthRegister) {
         this.healthRegister = healthRegister;
     }
-
- 
 
     public String getStatusProduct() {
         return statusProduct;
@@ -104,12 +103,12 @@ public class Product {
         this.statusProduct = statusProduct;
     }
 
-    public String getIdPresentation() {
-        return idPresentation;
+    public String getNamePresentation() {
+        return namePresentation;
     }
 
-    public void setIdPresentation(String idPresentation) {
-        this.idPresentation = idPresentation;
+    public void setNamePresentation(String namePresentation) {
+        this.namePresentation = namePresentation;
     }
 
     public String getIdLaboratory() {
@@ -119,7 +118,5 @@ public class Product {
     public void setIdLaboratory(String idLaboratory) {
         this.idLaboratory = idLaboratory;
     }
-    
-    
-    
+
 }

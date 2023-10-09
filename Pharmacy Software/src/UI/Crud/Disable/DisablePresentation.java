@@ -6,6 +6,7 @@ package UI.Crud.Disable;
 
 
 import Controller.ControllerPresentation;
+import Controller.IController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class DisablePresentation extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private ControllerPresentation controller = new ControllerPresentation();
+    private IController controller;
 
     /**
      * Creates new form SearchProducts
@@ -34,7 +35,8 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
         this.lb = lb;       
     }
     
-        public DisablePresentation() {
+        public DisablePresentation(IController controller ) {
+            this.controller = controller;
         initComponents();
         setLocation(300, 200);
         this.toFront();       
@@ -168,9 +170,9 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllPresentation(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
-            controller.addIdPresentationCb(this.jComboBox1);
+            controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisablePresentation.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -185,7 +187,7 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.searchPresentation(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisablePresentation.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,9 +198,9 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            controller.disablePresentation(jComboBox1.getSelectedItem().toString());
+            controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllPresentation(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

@@ -6,6 +6,7 @@ package UI.Crud.Search;
 
 import Controller.ControllerLaboratory;
 import Controller.ControllerProduct;
+import Controller.IController;
 import UI.SalesUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class SearchLab extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private ControllerLaboratory lab = new ControllerLaboratory();
+    private IController controller;
 
     /**
      * Creates new form SearchProducts
@@ -28,16 +29,18 @@ public class SearchLab extends javax.swing.JInternalFrame {
      * @param lb
      * @param emp
      */
-    public SearchLab(JLabel lb) {
+    public SearchLab(JLabel lb, IController controller) {
         initComponents();
         setLocation(300, 200);
         this.toFront();
         this.lb = lb;    
+         this.controller = controller;
     }
     
-    public SearchLab() {
+    public SearchLab(IController controller) {
          initComponents();
         setLocation(300, 200);
+         this.controller = controller;
     }
 
     /**
@@ -149,7 +152,7 @@ public class SearchLab extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            lab.getAllLaboratory(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,7 +168,7 @@ public class SearchLab extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            lab.searchLaboratory(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchLab.class.getName()).log(Level.SEVERE, null, ex);

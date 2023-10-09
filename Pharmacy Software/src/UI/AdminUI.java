@@ -1,5 +1,7 @@
 package UI;
 
+import Controller.*;
+import Model.Util;
 import UI.Crud.Create.*;
 import UI.Crud.Search.*;
 import java.awt.Color;
@@ -8,16 +10,17 @@ import javax.swing.ImageIcon;
 import UI.Crud.Disable.*;
 import UI.Crud.Update.*;
 
-/**
- *
- * @author ideapad330S
- */
+
 public class AdminUI extends javax.swing.JFrame {
 
+    private IController controller;
+    private IAddDataTF addData;
+    private Util u;
     public boolean existsPanel = false;
 
-    public AdminUI() {
+    public AdminUI(Util u) {
         initComponents();
+        this.u = u;
         this.setExtendedState(MAXIMIZED_BOTH);
         ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
                 + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
@@ -305,6 +308,11 @@ public class AdminUI extends javax.swing.JFrame {
         updateProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-pills-32.png"))); // NOI18N
         updateProduct.setText("Product");
         updateProduct.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        updateProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProductActionPerformed(evt);
+            }
+        });
         update.add(updateProduct);
         update.add(jSeparator13);
 
@@ -563,79 +571,99 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_salesBtn3MouseExited
 
     private void registerProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerProductActionPerformed
-        RegisterProduct regProduct = new RegisterProduct();
+        u = new Util();
+        controller = new ControllerProduct();
+        IController controller2 = new ControllerLaboratory();
+        IAddName con = new ControllerPresentation();
+        RegisterProduct regProduct = new RegisterProduct(u,controller,controller2,con);
         this.jDesktopPane1.add(regProduct);
         regProduct.setVisible(true);
     }//GEN-LAST:event_registerProductActionPerformed
 
     private void registerProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerProviderActionPerformed
-        RegisterProvider regProvider = new RegisterProvider();
+        controller = new ControllerProvider();
+        u = new Util();
+        RegisterProvider regProvider = new RegisterProvider(u, controller);
         this.jDesktopPane1.add(regProvider);
         regProvider.setVisible(true);
     }//GEN-LAST:event_registerProviderActionPerformed
 
     private void registerLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerLaboratoryActionPerformed
-        RegisterLab regLaboratory = new RegisterLab();
+        u = new Util();
+        controller = new ControllerLaboratory();
+        RegisterLab regLaboratory = new RegisterLab(u, controller);
         this.jDesktopPane1.add(regLaboratory);
         regLaboratory.setVisible(true);
     }//GEN-LAST:event_registerLaboratoryActionPerformed
 
     private void registerPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPresentationActionPerformed
-        RegisterPresentation regPresentation = new RegisterPresentation();
+        u = new Util();
+         controller = new ControllerPresentation();
+        RegisterPresentation regPresentation = new RegisterPresentation(u,controller);
         this.jDesktopPane1.add(regPresentation);
         regPresentation.setVisible(true);
     }//GEN-LAST:event_registerPresentationActionPerformed
 
     private void registerEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerEmployeeActionPerformed
-        RegisterEmployee regEmployee = new RegisterEmployee();
+        controller = new ControllerEmployee();
+        u = new Util();
+        RegisterEmployee regEmployee = new RegisterEmployee(controller, u);
         this.jDesktopPane1.add(regEmployee);
         regEmployee.setVisible(true);
     }//GEN-LAST:event_registerEmployeeActionPerformed
 
     private void searchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductActionPerformed
-        SearchProducts productsFrame = new SearchProducts();
+        controller = new ControllerProduct();
+        SearchProducts productsFrame = new SearchProducts(controller);
         this.jDesktopPane1.add(productsFrame);
         productsFrame.setVisible(true);
     }//GEN-LAST:event_searchProductActionPerformed
 
     private void searchLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLabActionPerformed
-        SearchLab labFrame = new SearchLab();
+        controller = new ControllerLaboratory();
+        SearchLab labFrame = new SearchLab(controller);
         this.jDesktopPane1.add(labFrame);
         labFrame.setVisible(true);
     }//GEN-LAST:event_searchLabActionPerformed
 
     private void searchPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPresentationActionPerformed
-        SearchPresentation pFrame = new SearchPresentation();
+       controller = new ControllerPresentation();
+        SearchPresentation pFrame = new SearchPresentation(controller);
         this.jDesktopPane1.add(pFrame);
         pFrame.setVisible(true);
     }//GEN-LAST:event_searchPresentationActionPerformed
 
     private void searchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchEmployeeActionPerformed
-        SearchEmployee empFrame = new SearchEmployee();
+         controller = new ControllerEmployee();
+        SearchEmployee empFrame = new SearchEmployee(controller);
         this.jDesktopPane1.add(empFrame);
         empFrame.setVisible(true);
     }//GEN-LAST:event_searchEmployeeActionPerformed
 
     private void searchProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProviderActionPerformed
-        SearchProvider pFrame = new SearchProvider();
+        controller = new ControllerProvider();
+        SearchProvider pFrame = new SearchProvider(controller);
         this.jDesktopPane1.add(pFrame);
         pFrame.setVisible(true);
     }//GEN-LAST:event_searchProviderActionPerformed
 
     private void disableProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProviderActionPerformed
-        DisableProvider disablePro = new DisableProvider();
+        controller = new ControllerProvider();
+        DisableProvider disablePro = new DisableProvider(controller);
         this.jDesktopPane1.add(disablePro);
         disablePro.setVisible(true);
     }//GEN-LAST:event_disableProviderActionPerformed
 
     private void disablePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disablePresentationActionPerformed
-        DisablePresentation disablePre = new DisablePresentation();
+        controller = new ControllerPresentation();
+        DisablePresentation disablePre = new DisablePresentation(controller);
         this.jDesktopPane1.add(disablePre);
         disablePre.setVisible(true);
     }//GEN-LAST:event_disablePresentationActionPerformed
 
     private void disableProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProductActionPerformed
-        DisableProduct disablePro = new DisableProduct();
+       controller = new ControllerProduct();
+        DisableProduct disablePro = new DisableProduct(controller);
         this.jDesktopPane1.add(disablePro);
         disablePro.setVisible(true);
     }//GEN-LAST:event_disableProductActionPerformed
@@ -645,40 +673,63 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_disableActionPerformed
 
     private void disableEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableEmployeeActionPerformed
-        DisableEmployee disableEmp = new DisableEmployee();
+       controller = new ControllerEmployee();
+        DisableEmployee disableEmp = new DisableEmployee(controller);
         this.jDesktopPane1.add(disableEmp);
         disableEmp.setVisible(true);
     }//GEN-LAST:event_disableEmployeeActionPerformed
 
     private void disableLaboratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableLaboratory1ActionPerformed
-        DisableLab disableLab = new DisableLab();
+        controller = new ControllerLaboratory();
+        DisableLab disableLab = new DisableLab(controller);
         this.jDesktopPane1.add(disableLab);
         disableLab.setVisible(true);
     }//GEN-LAST:event_disableLaboratory1ActionPerformed
 
     private void updatePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePresentationActionPerformed
-        UpdatePresentation updatePre = new UpdatePresentation();
+        u = new Util();
+        UpdatePresentation updatePre = new UpdatePresentation(u);
         this.jDesktopPane1.add(updatePre);
         updatePre.setVisible(true);
     }//GEN-LAST:event_updatePresentationActionPerformed
 
     private void updateLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLaboratoryActionPerformed
-        UpdateLab updateLab = new UpdateLab();
+        controller = new ControllerLaboratory();
+        u = new Util();
+        addData = new ControllerLaboratory();
+        UpdateLab updateLab = new UpdateLab(u, controller, addData);
         this.jDesktopPane1.add(updateLab);
         updateLab.setVisible(true);
     }//GEN-LAST:event_updateLaboratoryActionPerformed
 
     private void updateProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProviderActionPerformed
-        UpdateProvider updatePro = new UpdateProvider();
+        controller = new ControllerProvider();
+        u = new Util();
+        addData = new ControllerProvider();
+        UpdateProvider updatePro = new UpdateProvider(u, controller, addData);
         this.jDesktopPane1.add(updatePro);
         updatePro.setVisible(true);
     }//GEN-LAST:event_updateProviderActionPerformed
 
     private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
-       UpdateEmployee updateE = new UpdateEmployee();
+        u = new Util();
+        controller = new ControllerEmployee();
+        IAddDataTFCB ad = new ControllerEmployee();
+        UpdateEmployee updateE = new UpdateEmployee(u, controller, ad);
         this.jDesktopPane1.add(updateE);
         updateE.setVisible(true);
     }//GEN-LAST:event_updateEmployeeActionPerformed
+
+    private void updateProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProductActionPerformed
+         u = new Util();
+         controller = new ControllerProduct();
+         IAddDataCalendarTFCB ad = new ControllerProduct();
+         IAddName addP = new ControllerPresentation();
+         IController controller2 = new ControllerLaboratory();
+         UpdateProduct upP = new UpdateProduct(u,controller,controller2,ad,addP);
+         this.jDesktopPane1.add(upP);
+         upP.setVisible(true);
+    }//GEN-LAST:event_updateProductActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerPresentation;
+import Controller.IController;
 import Model.Presentation;
 import Model.Util;
 
@@ -19,10 +20,12 @@ import Model.Util;
  */
 public class RegisterPresentation extends javax.swing.JInternalFrame {
 
-    private ControllerPresentation controller = new ControllerPresentation();
-    private Util u = new Util();
-    public RegisterPresentation() {
+    private IController controller ;
+    private Util u;
+    public RegisterPresentation(Util u, IController controller) {
         initComponents();
+        this.controller = controller;
+        this.u = u;
         this.setLocation(280, 110);
     }
 
@@ -154,7 +157,7 @@ public class RegisterPresentation extends javax.swing.JInternalFrame {
                 jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllPresentation(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterPresentation.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,9 +169,9 @@ public class RegisterPresentation extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Presentation presentation =new Presentation(u.capitalize(nameTF.getText()));
         try {
-            controller.registerPresentation(presentation);
+            controller.register(presentation);
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAllPresentation(model);
+            controller.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterPresentation.class.getName()).log(Level.SEVERE, null, ex);
