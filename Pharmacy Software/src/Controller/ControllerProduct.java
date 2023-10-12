@@ -81,10 +81,10 @@ public class ControllerProduct implements IController, IAddDataCalendarTFCB {
         String dataUpdate = "'descriptionProduct = " + " \" " + p.getDescriptionProduct() + " \" " + ", concentration = "
                 + " \" " + p.getConcentration() + " \" " + ", stock =" + " \" " + p.getStock() + " \" "
                 + ", cost =" + " \" " + p.getCost() + " \" " + ", salePrice =" + " \" " + p.getSalePrice()
-                + " \" " + ", healthRegister =" + " \" " + p.getHealthRegister() + " \" "
+                + " \" " + ", healthRegister =" + "\" " + p.getHealthRegister() + "\""
                 + ", expirationDate =" + " \" " + p.getExpirationDate() + " \" "
-                + ", idPresentation ="+ " \" " + idPresentation + " \" "
-                + ", idLaboratory =" + " \" " + p.getIdLaboratory() + " \" " + "'";
+                + ", idPresentation ="+ " \"" + idPresentation + "\""
+                + ", idLaboratory =" + "\"" + p.getIdLaboratory() + "\"" + "'";
         String id = "'" + p.getId() + "'";
         if (exc.executeUpdateProcedure("'pharmacy.Product'", dataUpdate, "'idProduct'", id)) {
             JOptionPane.showMessageDialog(null, "Updated Product");
