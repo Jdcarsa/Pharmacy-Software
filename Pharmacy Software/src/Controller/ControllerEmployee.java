@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ControllerEmployee implements IController, IAddDataTFCB  {
+public class ControllerEmployee implements IController, IAddDataTFCB, IFindData  {
 
     public ControllerEmployee() {
     }

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Controller.IAddDataTF;
+import Controller.IFindData;
 
 /**
  *
@@ -25,10 +26,14 @@ public class UpdateLab extends javax.swing.JInternalFrame {
     private Util u;
     private IController controller;
     private IAddDataTF addData;
+    private IFindData find;
 
-    public UpdateLab(Util u, IController controller,  IAddDataTF  addData) {
+    public UpdateLab(Util u, IController controller,  IAddDataTF  addData,  IFindData find) {
         this.u = u;
         initComponents();
+        this.controller = controller;
+        this.addData = addData;
+        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -205,7 +210,7 @@ public class UpdateLab extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedIndex(0);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAll(model);
+            find.getAll(model);
             controller.addIdCb(this.jComboBox1);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
@@ -225,7 +230,7 @@ public class UpdateLab extends javax.swing.JInternalFrame {
                 lab.setId(id);
                 controller.update(lab);
                 DefaultTableModel model = new DefaultTableModel();
-                controller.getAll(model);
+                find.getAll(model);
                 this.jTable2.setModel(model);
             }
         } catch (ClassNotFoundException ex) {

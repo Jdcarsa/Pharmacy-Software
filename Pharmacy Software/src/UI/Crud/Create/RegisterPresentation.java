@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerPresentation;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Presentation;
 import Model.Util;
 
@@ -22,10 +23,12 @@ public class RegisterPresentation extends javax.swing.JInternalFrame {
 
     private IController controller ;
     private Util u;
-    public RegisterPresentation(Util u, IController controller) {
+    private IFindData find;
+    public RegisterPresentation(Util u, IController controller, IFindData find) {
         initComponents();
         this.controller = controller;
         this.u = u;
+        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -157,7 +160,7 @@ public class RegisterPresentation extends javax.swing.JInternalFrame {
                 jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterPresentation.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,7 +174,7 @@ public class RegisterPresentation extends javax.swing.JInternalFrame {
         try {
             controller.register(presentation);
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterPresentation.class.getName()).log(Level.SEVERE, null, ex);

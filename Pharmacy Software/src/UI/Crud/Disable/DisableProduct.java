@@ -4,9 +4,9 @@
  */
 package UI.Crud.Disable;
 
-
-import Controller.ControllerProduct ;
+import Controller.ControllerProduct;
 import Controller.IController;
+import Controller.IFindData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +19,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DisableProduct extends javax.swing.JInternalFrame {
 
-    private  JLabel lb;
+    private JLabel lb;
     private IController controller;
+    private IFindData find;
 
     /**
      * Creates new form SearchProducts
@@ -32,14 +33,15 @@ public class DisableProduct extends javax.swing.JInternalFrame {
         initComponents();
         setLocation(300, 200);
         this.toFront();
-        this.lb = lb;       
+        this.lb = lb;
     }
-    
-        public DisableProduct(IController controller ) {
-            this.controller = controller;
+
+    public DisableProduct(IController controller,IFindData find) {
+        this.controller = controller;
         initComponents();
         setLocation(300, 200);
-        this.toFront();       
+        this.toFront();
+        this.find = find;
     }
 
     /**
@@ -161,16 +163,17 @@ public class DisableProduct extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        if(lb!=null)
-        lb.setVisible(true);
-        
+        if (lb != null) {
+            lb.setVisible(true);
+        }
+
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
             controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
@@ -185,9 +188,9 @@ public class DisableProduct extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
-               try {
+        try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.search(model, this.search.getText().trim());
+            find.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisableProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +203,7 @@ public class DisableProduct extends javax.swing.JInternalFrame {
         try {
             controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

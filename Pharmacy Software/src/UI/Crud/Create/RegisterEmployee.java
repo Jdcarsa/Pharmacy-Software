@@ -6,6 +6,7 @@ package UI.Crud.Create;
 
 import Controller.ControllerEmployee;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Employee;
 import Model.Util;
 import java.sql.SQLException;
@@ -21,12 +22,15 @@ public class RegisterEmployee extends javax.swing.JInternalFrame {
 
     private IController controller;
     private Util u;
+    private IFindData find;
+           
     
     
-    public RegisterEmployee(IController controller, Util u) {
+    public RegisterEmployee(IController controller, Util u,  IFindData find) {
         initComponents();
         this.controller = controller;
         this.u = u;
+        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -263,7 +267,7 @@ public class RegisterEmployee extends javax.swing.JInternalFrame {
       this.jTable1.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterEmployee.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,7 +282,7 @@ public class RegisterEmployee extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             controller.register(emp);
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterEmployee.class.getName()).log(Level.SEVERE, null, ex);

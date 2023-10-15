@@ -7,6 +7,7 @@ package UI.Crud.Search;
 import Controller.ControllerProduct;
 import Controller.ControllerProvider;
 import Controller.IController;
+import Controller.IFindData;
 import UI.SalesUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class SearchProvider extends javax.swing.JInternalFrame {
 
     private JLabel lb;
-    private IController controller;
+   private IFindData find;
 
     /**
      * Creates new form SearchProducts
@@ -36,8 +37,8 @@ public class SearchProvider extends javax.swing.JInternalFrame {
         this.lb = lb;
     }
 
-    public SearchProvider(IController controller) {
-        this.controller = controller;
+    public SearchProvider(IFindData find) {
+        this.find = find;
         initComponents();
         setLocation(300, 200);
     }
@@ -151,7 +152,7 @@ public class SearchProvider extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,7 +168,7 @@ public class SearchProvider extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.search(model, this.search.getText().trim());
+            find.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchProvider.class.getName()).log(Level.SEVERE, null, ex);

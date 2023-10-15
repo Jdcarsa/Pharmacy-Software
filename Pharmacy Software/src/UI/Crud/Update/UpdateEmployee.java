@@ -7,6 +7,7 @@ package UI.Crud.Update;
 import UI.Crud.Create.*;
 import Controller.IAddDataTFCB;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Employee;
 import Model.Util;
 import java.sql.SQLException;
@@ -24,12 +25,14 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
 
     private IController controller;
     private IAddDataTFCB add;
+    private IFindData find;
     private Util u;
 
-    public UpdateEmployee(Util u, IController controller, IAddDataTFCB add) {
+    public UpdateEmployee(Util u, IController controller, IAddDataTFCB add, IFindData find) {
         initComponents();
         this.u = u;
         this.controller = controller;
+        this.find = find;
         this.add = add;
         this.setLocation(280, 110);
     }
@@ -281,7 +284,7 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
 
         try {
-            controller.getAll(model);
+           find.getAll(model);
             cbId.addItem("Select an Id");
             controller.addIdCb(cbId);
             this.jTable1.setModel(model);
@@ -296,7 +299,7 @@ public class UpdateEmployee extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             controller.update(emp);
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RegisterEmployee.class.getName()).log(Level.SEVERE, null, ex);

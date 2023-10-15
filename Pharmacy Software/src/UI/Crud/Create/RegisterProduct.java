@@ -7,6 +7,7 @@ package UI.Crud.Create;
 
 import Controller.IAddName;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Product;
 import Model.Util;
 import java.sql.SQLException;
@@ -24,14 +25,19 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
     private IController controllerPro;
     private IController controllerLab;
     private IAddName controllerPre;
+    private IFindData find;
+    private IFindData find2;
     private Util u;
 
-    public RegisterProduct(Util u, IController controllerPro, IController controllerLab, IAddName controllerPre) {
+    public RegisterProduct(Util u, IController controllerPro, IController controllerLab,
+            IAddName controllerPre, IFindData find , IFindData find2) {
         initComponents();
         this.u = u;
         this.controllerPro = controllerPro;
         this.controllerLab = controllerLab;
         this.controllerPre = controllerPre;
+        this.find = find;
+        this.find = find2;
         this.setLocation(280, 70);
     }
 
@@ -257,7 +263,7 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             controllerPro.register(p);
-            controllerPro.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(RegisterProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,8 +276,8 @@ public class RegisterProduct extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         DefaultTableModel modelT = new DefaultTableModel();
         try {
-            controllerLab.getAll(model);
-            controllerPro.getAll(modelT);
+            find.getAll(model);
+            find2.getAll(modelT);
             controllerLab.addIdCb(labCB);
             controllerPre.addNameCb(presentationCB);
             this.jTable1.setModel(model);

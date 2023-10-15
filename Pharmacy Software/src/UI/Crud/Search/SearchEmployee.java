@@ -7,6 +7,7 @@ package UI.Crud.Search;
 
 import Controller.ControllerEmployee;
 import Controller.IController;
+import Controller.IFindData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class SearchEmployee extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
-    private IController employee;
+    private IFindData find;
 
 
     /**
@@ -36,11 +37,12 @@ public class SearchEmployee extends javax.swing.JInternalFrame {
         this.lb = lb;    
     }
 
-        public SearchEmployee(IController employee) {
-            this.employee = employee;
+        public SearchEmployee( IFindData find) {
+        
         initComponents();
         setLocation(300, 200);
         this.toFront();
+        this.find = find;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,7 +152,7 @@ public class SearchEmployee extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            employee.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchEmployee.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,7 +168,7 @@ public class SearchEmployee extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            employee.search(model, this.search.getText().trim());
+           find.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchEmployee.class.getName()).log(Level.SEVERE, null, ex);

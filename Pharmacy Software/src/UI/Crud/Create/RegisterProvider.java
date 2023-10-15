@@ -7,6 +7,7 @@ package UI.Crud.Create;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerProvider;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Provider;
 import Model.Util;
 import java.sql.SQLException;
@@ -20,12 +21,14 @@ import java.util.logging.Logger;
 public class RegisterProvider extends javax.swing.JInternalFrame {
 
     private IController controller;
+    private IFindData find;
     private Util u;
     
-    public RegisterProvider(Util u, IController controller) {
+    public RegisterProvider(Util u, IController controller,  IFindData find) {
         this.u = u;
         this.controller = controller;
         initComponents();
+        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -241,7 +244,7 @@ public class RegisterProvider extends javax.swing.JInternalFrame {
         this.jTable1.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,7 +263,7 @@ public class RegisterProvider extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             controller.register(provider);
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterProvider.class.getName()).log(Level.SEVERE, null, ex);

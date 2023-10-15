@@ -16,5 +16,5 @@ import javax.swing.JTextField;
 public interface IAddDataCalendarTFCB {
     
     public void addDataTFCB(String id, JTextField[] textFields,
-            JComboBox [] cbs, JDateChooser dateChooser) throws ClassNotFoundException, SQLException;
+            JComboBox [] cbs, JDateChooser[] dateChooser) throws ClassNotFoundException, SQLException;
 }

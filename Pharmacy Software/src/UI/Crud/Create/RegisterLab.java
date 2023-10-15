@@ -3,6 +3,7 @@ package UI.Crud.Create;
 
 
 import Controller.IController;
+import Controller.IFindData;
 import Model.Laboratory;
 import Model.Util;
 import java.sql.SQLException;
@@ -18,11 +19,13 @@ public class RegisterLab extends javax.swing.JInternalFrame {
 
     private Util u;
     private IController controller;
+    private IFindData find;
 
-    public RegisterLab(Util u, IController controller) {
+    public RegisterLab(Util u, IController controller,IFindData find) {
         initComponents();
         this.u = u;
         this.controller = controller;
+        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -180,7 +183,7 @@ public class RegisterLab extends javax.swing.JInternalFrame {
         try {
             controller.register(lab);
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -193,7 +196,7 @@ public class RegisterLab extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            controller.getAll(model);
+            find.getAll(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegisterLab.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

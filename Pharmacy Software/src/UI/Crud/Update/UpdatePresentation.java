@@ -9,6 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerPresentation;
+import Controller.IAddDataTF;
+import Controller.IController;
+import Controller.IFindData;
 import Model.Presentation;
 import Model.Util;
 import javax.swing.JTextField;
@@ -19,11 +22,16 @@ import javax.swing.JTextField;
  */
 public class UpdatePresentation extends javax.swing.JInternalFrame {
 
-    private ControllerPresentation controller = new ControllerPresentation();
+    private IController controller;
+    private IFindData find;
     private Util u;
+    private IAddDataTF add;
 
-    public UpdatePresentation(Util u) {
+    public UpdatePresentation(Util u, IController controller , IFindData find , IAddDataTF add) {
         this.u = u;
+        this.controller = controller;
+        this.find = find;
+        this.add = add;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -179,7 +187,7 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
         jComboBox1.setSelectedIndex(0);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
             controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
@@ -197,7 +205,7 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
                 presentation.setId(id);
                 controller.update(presentation);
                 DefaultTableModel model = new DefaultTableModel();
-                controller.getAll(model);
+                find.getAll(model);
                 this.jTable2.setModel(model);
             }
         } catch (ClassNotFoundException ex) {
@@ -212,7 +220,7 @@ public class UpdatePresentation extends javax.swing.JInternalFrame {
             String selectedItem = jComboBox1.getSelectedItem().toString();
             try {
                 JTextField[] textFields = {nameTF};
-                controller.addDataTF(selectedItem, textFields);
+                add.addDataTF(selectedItem, textFields);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UpdatePresentation.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

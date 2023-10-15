@@ -3,8 +3,10 @@ package UI.Crud.Update;
 import Controller.IAddDataCalendarTFCB;
 import Controller.IAddName;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Product;
 import Model.Util;
+import com.toedter.calendar.JDateChooser;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -23,14 +25,18 @@ public class UpdateProduct extends javax.swing.JInternalFrame {
     private IController controllerLab;
     private IAddName addNamePresentation;
     private IAddDataCalendarTFCB addData;
+    private IFindData find;
+    private IFindData find2;
     private Util u;
 
     // quede en este
     public UpdateProduct(Util u, IController controllerPro, IController controllerLab, IAddDataCalendarTFCB addData,
-             IAddName addNamePresentation) {
+             IAddName addNamePresentation,  IFindData find, IFindData find2) {
         this.u = u;
         this.controllerPro = controllerPro;
         this.controllerLab = controllerLab;
+        this.find = find;
+        this.find2 = find2;
         this.addData = addData;
         this.addNamePresentation = addNamePresentation;
         initComponents();
@@ -308,8 +314,8 @@ public class UpdateProduct extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         DefaultTableModel modelT = new DefaultTableModel();
         try {
-            controllerLab.getAll(model);
-            controllerPro.getAll(modelT);
+            find2.getAll(model);
+            find.getAll(modelT);
             controllerLab.addIdCb(labCB);
             controllerPro.addIdCb(cbId);
             addNamePresentation.addNameCb(presentationCB);
@@ -331,7 +337,7 @@ public class UpdateProduct extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             controllerPro.update(p);
-            controllerPro.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UpdateProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -344,8 +350,9 @@ public class UpdateProduct extends javax.swing.JInternalFrame {
             JTextField[] textFields = {nameTF, contratiTF, stockTF,
                 costTF, priceTF, healhtRegTF};
             JComboBox[] cbs = {labCB, presentationCB};
+            JDateChooser[] dateCh = {expDateDT};
             try {
-                addData.addDataTFCB(id, textFields, cbs, expDateDT);
+                addData.addDataTFCB(id, textFields, cbs, dateCh);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(UpdateEmployee.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -7,6 +7,7 @@ package UI.Crud.Disable;
 
 import Controller.ControllerPresentation;
 import Controller.IController;
+import Controller.IFindData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
 
     private  JLabel lb;
     private IController controller;
+    private IFindData find;
 
     /**
      * Creates new form SearchProducts
@@ -35,8 +37,9 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
         this.lb = lb;       
     }
     
-        public DisablePresentation(IController controller ) {
+        public DisablePresentation(IController controller, IFindData find ) {
             this.controller = controller;
+            this.find = find;
         initComponents();
         setLocation(300, 200);
         this.toFront();       
@@ -170,7 +173,7 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
         jTable2.setEnabled(false);
         try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
             controller.addIdCb(this.jComboBox1);
         } catch (ClassNotFoundException ex) {
@@ -187,7 +190,7 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
                try {
             DefaultTableModel model = new DefaultTableModel();
-            controller.search(model, this.search.getText().trim());
+            find.search(model, this.search.getText().trim());
             this.jTable2.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DisablePresentation.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +203,7 @@ public class DisablePresentation extends javax.swing.JInternalFrame {
         try {
             controller.disable(jComboBox1.getSelectedItem().toString());
             DefaultTableModel model = new DefaultTableModel();
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable2.setModel(model);
             this.jComboBox1.removeItem(jComboBox1.getSelectedItem());
         } catch (ClassNotFoundException ex) {

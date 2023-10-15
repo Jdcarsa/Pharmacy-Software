@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ControllerPresentation implements IController, IAddName, IAddDataTF  {
+public class ControllerPresentation implements IController, IAddName, IAddDataTF, IFindData  {
 
     public ControllerPresentation ()
     {

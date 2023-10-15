@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ideapad330S
  */
-public class ControllerLaboratory implements IController, IAddDataTF {
+public class ControllerLaboratory implements IController, IAddDataTF , IFindData {
 
     public ControllerLaboratory() {
     }

@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.ControllerProvider;
 import Controller.IAddDataTF;
 import Controller.IController;
+import Controller.IFindData;
 import Model.Provider;
 import Model.Util;
 import java.sql.SQLException;
@@ -24,12 +25,14 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
 
     private IController controller;
     private IAddDataTF addD;
+    private IFindData find;
     private Util u;
 
-    public UpdateProvider(Util u, IController controller, IAddDataTF addD) {
+    public UpdateProvider(Util u, IController controller, IAddDataTF addD, IFindData find) {
         this.u = u;
         this.controller = controller;
         this.addD = addD;
+        this.find = find;
         initComponents();
         this.setLocation(280, 110);
     }
@@ -261,7 +264,7 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
         jComboBox1.insertItemAt("Select", 0);
         jComboBox1.setSelectedIndex(0);
         try {
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
             controller.addIdCb(jComboBox1);
         } catch (ClassNotFoundException ex) {
@@ -283,7 +286,7 @@ public class UpdateProvider extends javax.swing.JInternalFrame {
         provider.setId(id);
         try {
             controller.update(provider);
-            controller.getAll(model);
+            find.getAll(model);
             this.jTable1.setModel(model);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateProvider.class.getName()).log(Level.SEVERE, null, ex);

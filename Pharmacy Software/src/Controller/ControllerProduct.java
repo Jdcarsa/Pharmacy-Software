@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ideapad330S
  */
-public class ControllerProduct implements IController, IAddDataCalendarTFCB {
+public class ControllerProduct implements IController, IAddDataCalendarTFCB , IFindData{
 
     public ControllerProduct() {
     }
@@ -92,7 +92,7 @@ public class ControllerProduct implements IController, IAddDataCalendarTFCB {
     }
 
     @Override
-    public void addDataTFCB(String id, JTextField[] textFields, JComboBox[] cbs, JDateChooser dateChooser)
+    public void addDataTFCB(String id, JTextField[] textFields, JComboBox[] cbs, JDateChooser[] dateChooser)
             throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
         executeSmtDb ex = new executeSmtDb();
@@ -109,7 +109,7 @@ public class ControllerProduct implements IController, IAddDataCalendarTFCB {
         cbs[0].setSelectedItem(value.get(value.size() - 2));
         cbs[1].setSelectedItem(namePresentation);
         try {
-            dateChooser.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(value.get(value.size()-1)));
+            dateChooser[0].setDate(new SimpleDateFormat("yyyy-MM-dd").parse(value.get(value.size()-1)));
         } catch (ParseException ex1) {
             Logger.getLogger(ControllerProduct.class.getName()).log(Level.SEVERE, null, ex1);
         }

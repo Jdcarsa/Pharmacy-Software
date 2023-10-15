@@ -10,12 +10,12 @@ import javax.swing.ImageIcon;
 import UI.Crud.Disable.*;
 import UI.Crud.Update.*;
 
-
 public class AdminUI extends javax.swing.JFrame {
 
     private IController controller;
     private IAddDataTF addData;
     private Util u;
+    private IFindData find;
     public boolean existsPanel = false;
 
     public AdminUI(Util u) {
@@ -88,7 +88,7 @@ public class AdminUI extends javax.swing.JFrame {
         setTitle("Admin");
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(139, 139, 253));
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/v1033-a-11-b-removebg-preview.png"))); // NOI18N
 
@@ -575,7 +575,9 @@ public class AdminUI extends javax.swing.JFrame {
         controller = new ControllerProduct();
         IController controller2 = new ControllerLaboratory();
         IAddName con = new ControllerPresentation();
-        RegisterProduct regProduct = new RegisterProduct(u,controller,controller2,con);
+        find = new ControllerProduct();
+        IFindData find2 = new ControllerLaboratory();
+        RegisterProduct regProduct = new RegisterProduct(u, controller, controller2, con, find, find2);
         this.jDesktopPane1.add(regProduct);
         regProduct.setVisible(true);
     }//GEN-LAST:event_registerProductActionPerformed
@@ -583,7 +585,8 @@ public class AdminUI extends javax.swing.JFrame {
     private void registerProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerProviderActionPerformed
         controller = new ControllerProvider();
         u = new Util();
-        RegisterProvider regProvider = new RegisterProvider(u, controller);
+        find = new ControllerProvider();
+        RegisterProvider regProvider = new RegisterProvider(u, controller, find);
         this.jDesktopPane1.add(regProvider);
         regProvider.setVisible(true);
     }//GEN-LAST:event_registerProviderActionPerformed
@@ -591,15 +594,17 @@ public class AdminUI extends javax.swing.JFrame {
     private void registerLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerLaboratoryActionPerformed
         u = new Util();
         controller = new ControllerLaboratory();
-        RegisterLab regLaboratory = new RegisterLab(u, controller);
+        find = new ControllerLaboratory();
+        RegisterLab regLaboratory = new RegisterLab(u, controller, find);
         this.jDesktopPane1.add(regLaboratory);
         regLaboratory.setVisible(true);
     }//GEN-LAST:event_registerLaboratoryActionPerformed
 
     private void registerPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPresentationActionPerformed
         u = new Util();
-         controller = new ControllerPresentation();
-        RegisterPresentation regPresentation = new RegisterPresentation(u,controller);
+        controller = new ControllerPresentation();
+        find = new ControllerPresentation();
+        RegisterPresentation regPresentation = new RegisterPresentation(u, controller, find);
         this.jDesktopPane1.add(regPresentation);
         regPresentation.setVisible(true);
     }//GEN-LAST:event_registerPresentationActionPerformed
@@ -607,63 +612,68 @@ public class AdminUI extends javax.swing.JFrame {
     private void registerEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerEmployeeActionPerformed
         controller = new ControllerEmployee();
         u = new Util();
-        RegisterEmployee regEmployee = new RegisterEmployee(controller, u);
+        find = new ControllerEmployee();
+        RegisterEmployee regEmployee = new RegisterEmployee(controller, u, find);
         this.jDesktopPane1.add(regEmployee);
         regEmployee.setVisible(true);
     }//GEN-LAST:event_registerEmployeeActionPerformed
 
     private void searchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProductActionPerformed
-        controller = new ControllerProduct();
-        SearchProducts productsFrame = new SearchProducts(controller);
+        find = new ControllerProduct();
+        SearchProducts productsFrame = new SearchProducts(find);
         this.jDesktopPane1.add(productsFrame);
         productsFrame.setVisible(true);
     }//GEN-LAST:event_searchProductActionPerformed
 
     private void searchLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLabActionPerformed
-        controller = new ControllerLaboratory();
-        SearchLab labFrame = new SearchLab(controller);
+        find = new ControllerLaboratory();
+        SearchLab labFrame = new SearchLab(find);
         this.jDesktopPane1.add(labFrame);
         labFrame.setVisible(true);
     }//GEN-LAST:event_searchLabActionPerformed
 
     private void searchPresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPresentationActionPerformed
-       controller = new ControllerPresentation();
-        SearchPresentation pFrame = new SearchPresentation(controller);
+
+        find = new ControllerPresentation();
+        SearchPresentation pFrame = new SearchPresentation(find);
         this.jDesktopPane1.add(pFrame);
         pFrame.setVisible(true);
     }//GEN-LAST:event_searchPresentationActionPerformed
 
     private void searchEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchEmployeeActionPerformed
-         controller = new ControllerEmployee();
-        SearchEmployee empFrame = new SearchEmployee(controller);
+        find = new ControllerEmployee();
+        SearchEmployee empFrame = new SearchEmployee(find);
         this.jDesktopPane1.add(empFrame);
         empFrame.setVisible(true);
     }//GEN-LAST:event_searchEmployeeActionPerformed
 
     private void searchProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchProviderActionPerformed
-        controller = new ControllerProvider();
-        SearchProvider pFrame = new SearchProvider(controller);
+        find = new ControllerProvider();
+        SearchProvider pFrame = new SearchProvider(find);
         this.jDesktopPane1.add(pFrame);
         pFrame.setVisible(true);
     }//GEN-LAST:event_searchProviderActionPerformed
 
     private void disableProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProviderActionPerformed
         controller = new ControllerProvider();
-        DisableProvider disablePro = new DisableProvider(controller);
+        find = new ControllerProvider();
+        DisableProvider disablePro = new DisableProvider(controller, find);
         this.jDesktopPane1.add(disablePro);
         disablePro.setVisible(true);
     }//GEN-LAST:event_disableProviderActionPerformed
 
     private void disablePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disablePresentationActionPerformed
         controller = new ControllerPresentation();
-        DisablePresentation disablePre = new DisablePresentation(controller);
+        find = new ControllerPresentation();
+        DisablePresentation disablePre = new DisablePresentation(controller, find);
         this.jDesktopPane1.add(disablePre);
         disablePre.setVisible(true);
     }//GEN-LAST:event_disablePresentationActionPerformed
 
     private void disableProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableProductActionPerformed
-       controller = new ControllerProduct();
-        DisableProduct disablePro = new DisableProduct(controller);
+        controller = new ControllerProduct();
+        find = new ControllerProduct();
+        DisableProduct disablePro = new DisableProduct(controller, find);
         this.jDesktopPane1.add(disablePro);
         disablePro.setVisible(true);
     }//GEN-LAST:event_disableProductActionPerformed
@@ -673,22 +683,27 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_disableActionPerformed
 
     private void disableEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableEmployeeActionPerformed
-       controller = new ControllerEmployee();
-        DisableEmployee disableEmp = new DisableEmployee(controller);
+        controller = new ControllerEmployee();
+        find = new ControllerEmployee();
+        DisableEmployee disableEmp = new DisableEmployee(controller, find);
         this.jDesktopPane1.add(disableEmp);
         disableEmp.setVisible(true);
     }//GEN-LAST:event_disableEmployeeActionPerformed
 
     private void disableLaboratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disableLaboratory1ActionPerformed
         controller = new ControllerLaboratory();
-        DisableLab disableLab = new DisableLab(controller);
+        find = new ControllerLaboratory();
+        DisableLab disableLab = new DisableLab(controller, find);
         this.jDesktopPane1.add(disableLab);
         disableLab.setVisible(true);
     }//GEN-LAST:event_disableLaboratory1ActionPerformed
 
     private void updatePresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePresentationActionPerformed
         u = new Util();
-        UpdatePresentation updatePre = new UpdatePresentation(u);
+        controller = new ControllerPresentation();
+        find = new ControllerPresentation();
+        addData = new ControllerPresentation();
+        UpdatePresentation updatePre = new UpdatePresentation(u, controller, find, addData);
         this.jDesktopPane1.add(updatePre);
         updatePre.setVisible(true);
     }//GEN-LAST:event_updatePresentationActionPerformed
@@ -697,7 +712,8 @@ public class AdminUI extends javax.swing.JFrame {
         controller = new ControllerLaboratory();
         u = new Util();
         addData = new ControllerLaboratory();
-        UpdateLab updateLab = new UpdateLab(u, controller, addData);
+        find = new ControllerLaboratory();
+        UpdateLab updateLab = new UpdateLab(u, controller, addData, find);
         this.jDesktopPane1.add(updateLab);
         updateLab.setVisible(true);
     }//GEN-LAST:event_updateLaboratoryActionPerformed
@@ -706,7 +722,8 @@ public class AdminUI extends javax.swing.JFrame {
         controller = new ControllerProvider();
         u = new Util();
         addData = new ControllerProvider();
-        UpdateProvider updatePro = new UpdateProvider(u, controller, addData);
+        find = new ControllerProvider();
+        UpdateProvider updatePro = new UpdateProvider(u, controller, addData, find);
         this.jDesktopPane1.add(updatePro);
         updatePro.setVisible(true);
     }//GEN-LAST:event_updateProviderActionPerformed
@@ -715,20 +732,23 @@ public class AdminUI extends javax.swing.JFrame {
         u = new Util();
         controller = new ControllerEmployee();
         IAddDataTFCB ad = new ControllerEmployee();
-        UpdateEmployee updateE = new UpdateEmployee(u, controller, ad);
+        find = new ControllerEmployee();
+        UpdateEmployee updateE = new UpdateEmployee(u, controller, ad, find);
         this.jDesktopPane1.add(updateE);
         updateE.setVisible(true);
     }//GEN-LAST:event_updateEmployeeActionPerformed
 
     private void updateProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProductActionPerformed
-         u = new Util();
-         controller = new ControllerProduct();
-         IAddDataCalendarTFCB ad = new ControllerProduct();
-         IAddName addP = new ControllerPresentation();
-         IController controller2 = new ControllerLaboratory();
-         UpdateProduct upP = new UpdateProduct(u,controller,controller2,ad,addP);
-         this.jDesktopPane1.add(upP);
-         upP.setVisible(true);
+        u = new Util();
+        controller = new ControllerProduct();
+        IAddDataCalendarTFCB ad = new ControllerProduct();
+        IAddName addP = new ControllerPresentation();
+        IController controller2 = new ControllerLaboratory();
+        find = new ControllerProduct();
+        IFindData find2 = new ControllerLaboratory();
+        UpdateProduct upP = new UpdateProduct(u, controller, controller2, ad, addP, find, find2);
+        this.jDesktopPane1.add(upP);
+        upP.setVisible(true);
     }//GEN-LAST:event_updateProductActionPerformed
 
 
