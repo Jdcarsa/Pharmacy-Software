@@ -1,7 +1,9 @@
 package UI;
 
 import Controller.*;
+import Controller.AdminFunctions.FunctionsContractEmployee;
 import Model.Util;
+import UI.Admin.Options.ContractEmployee;
 import UI.Crud.Create.*;
 import UI.Crud.Search.*;
 import java.awt.Color;
@@ -35,7 +37,6 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        pucharseBtn = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         detailsBtn = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
@@ -94,29 +95,6 @@ public class AdminUI extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        pucharseBtn.setBackground(new java.awt.Color(51, 153, 255));
-        pucharseBtn.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
-        pucharseBtn.setForeground(new java.awt.Color(51, 51, 51));
-        pucharseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-price-tag-32.png"))); // NOI18N
-        pucharseBtn.setText("Pucharse");
-        pucharseBtn.setContentAreaFilled(false);
-        pucharseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pucharseBtn.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        pucharseBtn.setFocusable(false);
-        pucharseBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        pucharseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pucharseBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pucharseBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pucharseBtnMouseExited(evt);
-            }
-        });
-        jToolBar1.add(pucharseBtn);
-
         jSeparator4.setSeparatorSize(new java.awt.Dimension(20, 0));
         jToolBar1.add(jSeparator4);
 
@@ -164,6 +142,11 @@ public class AdminUI extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 salesBtn3MouseExited(evt);
+            }
+        });
+        salesBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesBtn3ActionPerformed(evt);
             }
         });
         jToolBar1.add(salesBtn3);
@@ -522,18 +505,6 @@ public class AdminUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pucharseBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pucharseBtnMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pucharseBtnMouseClicked
-
-    private void pucharseBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pucharseBtnMouseEntered
-        pucharseBtn.setForeground(Color.black);
-    }//GEN-LAST:event_pucharseBtnMouseEntered
-
-    private void pucharseBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pucharseBtnMouseExited
-        pucharseBtn.setForeground(Color.darkGray);
-    }//GEN-LAST:event_pucharseBtnMouseExited
-
     private void detailsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailsBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_detailsBtnMouseClicked
@@ -751,6 +722,12 @@ public class AdminUI extends javax.swing.JFrame {
         upP.setVisible(true);
     }//GEN-LAST:event_updateProductActionPerformed
 
+    private void salesBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesBtn3ActionPerformed
+        ContractEmployee cE = new ContractEmployee(new FunctionsContractEmployee());
+        this.jDesktopPane1.add(cE);
+        cE.setVisible(true);
+    }//GEN-LAST:event_salesBtn3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton detailsBtn;
@@ -784,7 +761,6 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JButton pucharseBtn;
     private javax.swing.JMenu register;
     private javax.swing.JMenuItem registerEmployee;
     private javax.swing.JMenuItem registerLaboratory;
