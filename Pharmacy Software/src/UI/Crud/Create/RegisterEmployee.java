@@ -5,8 +5,8 @@
 package UI.Crud.Create;
 
 import Controller.ControllerEmployee;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Employee;
 import Model.Util;
 import java.sql.SQLException;

@@ -4,8 +4,8 @@ package Main;
 
 import Model.Util;
 import UI.AdminUI;
-import UI.SalesUI;
 import UI.Login;
+
 
 
 public class Main extends javax.swing.JFrame {
@@ -31,7 +31,7 @@ public class Main extends javax.swing.JFrame {
         }
                 java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminUI(u).setVisible(true);
+                new Login().setVisible(true);
             }
         });
         

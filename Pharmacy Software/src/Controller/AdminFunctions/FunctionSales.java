@@ -4,7 +4,7 @@
  */
 package Controller.AdminFunctions;
 
-import Controller.IFindData;
+import Controller.Interfaces.IFindData;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 

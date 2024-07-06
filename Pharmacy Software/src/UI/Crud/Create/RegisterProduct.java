@@ -5,9 +5,9 @@
 package UI.Crud.Create;
 
 
-import Controller.IAddName;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IAddName;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Product;
 import Model.Util;
 import java.sql.SQLException;

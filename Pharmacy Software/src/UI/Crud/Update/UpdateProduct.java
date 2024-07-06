@@ -1,9 +1,9 @@
 package UI.Crud.Update;
 
-import Controller.IAddDataCalendarTFCB;
-import Controller.IAddName;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IAddDataCalendarTFCB;
+import Controller.Interfaces.IAddName;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Product;
 import Model.Util;
 import com.toedter.calendar.JDateChooser;

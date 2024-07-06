@@ -5,8 +5,8 @@
 package UI.Crud.Disable;
 
 import Controller.ControllerProduct;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

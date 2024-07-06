@@ -6,8 +6,8 @@ package UI.Crud.Search;
 
 import Controller.ControllerLaboratory;
 import Controller.ControllerProduct;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import UI.SalesUI;
 import java.sql.SQLException;
 import java.util.logging.Level;

@@ -10,8 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerPresentation;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Presentation;
 import Model.Util;
 

@@ -5,8 +5,8 @@
 package UI.Crud.Search;
 
 import Controller.ControllerPresentation;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

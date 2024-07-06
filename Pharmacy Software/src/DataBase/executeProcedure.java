@@ -1,5 +1,6 @@
 package DataBase;
 
+import DataBase.Interfaces.IExecuteProcedure;
 import java.sql.SQLException;
 import java.sql.CallableStatement;
 import javax.swing.JOptionPane;

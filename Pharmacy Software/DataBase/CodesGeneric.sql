@@ -41,6 +41,8 @@ call updateAnyData('Laboratory','nameLaboratory = "Cruz",
 address = "Arg" , phone = "132"', 'idLaboratory','Lab-003');
 
 call updateAnyData('Employee', 'nameEmployee = "Diego"', 'idEmployee' , 'Emp-001');
+
+call updateAnyData('Employee', 'nameEmployee = "Diego"', 'idEmployee' , 'Emp-001');
 /*------------- Update ----------*/
 
 

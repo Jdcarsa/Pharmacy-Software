@@ -6,7 +6,7 @@ package UI.Crud.Update;
 
 import UI.Crud.Create.*;
 import Controller.ControllerLaboratory;
-import Controller.IController;
+import Controller.Interfaces.IController;
 import Model.Laboratory;
 import Model.Util;
 import java.sql.SQLException;
@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import Controller.IAddDataTF;
-import Controller.IFindData;
+import Controller.Interfaces.IAddDataTF;
+import Controller.Interfaces.IFindData;
 
 /**
  *

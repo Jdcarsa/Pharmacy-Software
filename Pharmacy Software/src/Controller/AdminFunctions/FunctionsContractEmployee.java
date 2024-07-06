@@ -5,8 +5,8 @@
 package Controller.AdminFunctions;
 
 import Controller.ControllerProduct;
-import Controller.IAddDataCalendarTFCB;
-import Controller.IFindData;
+import Controller.Interfaces.IAddDataCalendarTFCB;
+import Controller.Interfaces.IFindData;
 import DataBase.executeProcedure;
 import DataBase.executeSmtDb;
 import Model.Contract;

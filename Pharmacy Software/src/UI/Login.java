@@ -1,19 +1,25 @@
-
 package UI;
 
+import Controller.ControllerAccount;
+import Model.Util;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
- 
+    private ControllerAccount acc = new ControllerAccount();
+    private Util u = new Util();
+
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-         ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
-                 + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
-         this.setIconImage(icon.getImage());
+        ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
+                + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
+        this.setIconImage(icon.getImage());
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -72,6 +78,11 @@ public class Login extends javax.swing.JFrame {
         singUpBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 singUpBtnMouseClicked(evt);
+            }
+        });
+        singUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singUpBtnActionPerformed(evt);
             }
         });
         bgPanel.add(singUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 290, 50));
@@ -157,14 +168,43 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void singUpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singUpBtnMouseClicked
-       this.setVisible(false);
-     SalesUI a = new SalesUI();
-      a.setVisible(true);
+        this.setVisible(false);
+        SalesUI a = new SalesUI();
+        a.setVisible(true);
 
     }//GEN-LAST:event_singUpBtnMouseClicked
 
+    private void singUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singUpBtnActionPerformed
+        char[] pass = passwordField.getPassword();
+        String passText = new String(pass);
+        try {
+            int access = acc.loginAuth(userTf.getText(), passText);
+            switch (access) {
+                case 1 -> {
+                    JOptionPane.showMessageDialog(null, "Welcome Admin");
+                    String id = acc.findUserId(userTf.getText(), passText);
+                    AdminUI admin = new AdminUI(u, id);
+                    admin.setVisible(true);
+                    break;
+                }
+                case 2 -> {
+                    JOptionPane.showMessageDialog(null, "Welcome Doctor");
+                    break;
+                }
+                case 3 -> {
+                    JOptionPane.showMessageDialog(null, "Welcome Assitant");
+                    break;
+                }
+                default -> {
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_singUpBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

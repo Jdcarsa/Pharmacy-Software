@@ -6,8 +6,8 @@ package UI.Crud.Create;
 
 import javax.swing.table.DefaultTableModel;
 import Controller.ControllerProvider;
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Provider;
 import Model.Util;
 import java.sql.SQLException;

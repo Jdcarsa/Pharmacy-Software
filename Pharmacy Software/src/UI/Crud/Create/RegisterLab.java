@@ -2,8 +2,8 @@
 package UI.Crud.Create;
 
 
-import Controller.IController;
-import Controller.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IFindData;
 import Model.Laboratory;
 import Model.Util;
 import java.sql.SQLException;

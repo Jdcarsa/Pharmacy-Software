@@ -1,5 +1,11 @@
 package UI;
 
+import Controller.Interfaces.IFindData;
+import Controller.Interfaces.IController;
+import Controller.Interfaces.IAddName;
+import Controller.Interfaces.IAddDataTFCB;
+import Controller.Interfaces.IAddDataTF;
+import Controller.Interfaces.IAddDataCalendarTFCB;
 import Controller.*;
 import Controller.AdminFunctions.FunctionsContractEmployee;
 import Model.Util;
@@ -19,14 +25,16 @@ public class AdminUI extends javax.swing.JFrame {
     private Util u;
     private IFindData find;
     public boolean existsPanel = false;
+    private String id;
 
-    public AdminUI(Util u) {
+    public AdminUI(Util u, String id) {
         initComponents();
         this.u = u;
         this.setExtendedState(MAXIMIZED_BOTH);
         ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
                 + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
         this.setIconImage(icon.getImage());
+        this.id = id;
     }
 
     @SuppressWarnings("unchecked")
@@ -119,6 +127,11 @@ public class AdminUI extends javax.swing.JFrame {
                 detailsBtnMouseExited(evt);
             }
         });
+        detailsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsBtnActionPerformed(evt);
+            }
+        });
         jToolBar1.add(detailsBtn);
         jToolBar1.add(jSeparator9);
 
@@ -172,6 +185,11 @@ public class AdminUI extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 salesBtn2MouseExited(evt);
+            }
+        });
+        salesBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesBtn2ActionPerformed(evt);
             }
         });
         jToolBar1.add(salesBtn2);
@@ -727,6 +745,16 @@ public class AdminUI extends javax.swing.JFrame {
         this.jDesktopPane1.add(cE);
         cE.setVisible(true);
     }//GEN-LAST:event_salesBtn3ActionPerformed
+
+    private void detailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsBtnActionPerformed
+      
+    }//GEN-LAST:event_detailsBtnActionPerformed
+
+    private void salesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesBtn2ActionPerformed
+        Account acc = new Account(id);
+        this.jDesktopPane1.add(acc);
+        acc.setVisible(true);
+    }//GEN-LAST:event_salesBtn2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
