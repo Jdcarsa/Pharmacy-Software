@@ -7,9 +7,11 @@ import Controller.Interfaces.IAddDataTFCB;
 import Controller.Interfaces.IAddDataTF;
 import Controller.Interfaces.IAddDataCalendarTFCB;
 import Controller.*;
+import Controller.AdminFunctions.ControllerDetailsSales;
 import Controller.AdminFunctions.FunctionsContractEmployee;
 import Model.Util;
 import UI.Admin.Options.ContractEmployee;
+import UI.Admin.Options.DetailsSales;
 import UI.Crud.Create.*;
 import UI.Crud.Search.*;
 import java.awt.Color;
@@ -747,7 +749,10 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_salesBtn3ActionPerformed
 
     private void detailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsBtnActionPerformed
-      
+        find = new ControllerDetailsSales();
+        DetailsSales details = new DetailsSales(find);
+        this.jDesktopPane1.add(details);
+        details.setVisible(true);
     }//GEN-LAST:event_detailsBtnActionPerformed
 
     private void salesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesBtn2ActionPerformed

@@ -44,10 +44,18 @@ public class ControllerAccount implements IAddDataTF {
 
     public int loginAuth(String user, String password) throws ClassNotFoundException, SQLException {
         executeSmtDb exc = new executeSmtDb();
-        List<String> value = exc.executeSmtSelect("Select employeeUser, passwordUser, typeUser "
-                + "FROM pharmacy.useremployee"
-                + "where stateUser like 'Active' and employeeUser = '" + user + "'" + "and passwordUser = '" + password + "'");
-        
+
+        String select = "SELECT employeeUser, passwordUser, typeUser "
+                + "FROM pharmacy.useremployee "
+                + "WHERE stateUser LIKE 'Active' AND employeeUser = '" + user + "' AND passwordUser = '" + password + "'";
+
+        List<String> value = exc.executeSmtSelect(select);
+
+        if (value.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "User or Password Incorrect");
+            return -1;
+        }
+
         boolean flag = value.get(0).equalsIgnoreCase(user) && value.get(1).equalsIgnoreCase(password);
 
         if (!flag) {
@@ -63,15 +71,14 @@ public class ControllerAccount implements IAddDataTF {
             return 3;
         }
     }
-    
-    public String findUserId(String user, String password) throws ClassNotFoundException, SQLException{
-                executeSmtDb exc = new executeSmtDb();
-        String value = exc.executeSmtSelect("Select idUser "
-                + "FROM pharmacy.useremployee"
-                + "where stateUser like 'Active' and employeeUser = '" 
-                + user + "'" + "and passwordUser = '" + password + "'", 
-                "idUser");
-        
+
+    public String findUserId(String user, String password) throws ClassNotFoundException, SQLException {
+        executeSmtDb exc = new executeSmtDb();
+        String select = "SELECT idUser "
+                + "FROM pharmacy.useremployee "
+                + "WHERE stateUser LIKE 'Active' AND employeeUser = '" + user + "' AND passwordUser = '" + password + "'";
+        String value = exc.executeSmtSelect(select, "idUser");
+
         return value;
     }
 

@@ -170,9 +170,7 @@ public class Login extends javax.swing.JFrame {
 
 
     private void singUpBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_singUpBtnMouseClicked
-        this.setVisible(false);
-        SalesUI a = new SalesUI();
-        a.setVisible(true);
+
 
     }//GEN-LAST:event_singUpBtnMouseClicked
 
@@ -185,6 +183,7 @@ public class Login extends javax.swing.JFrame {
                 case 1 -> {
                     JOptionPane.showMessageDialog(null, "Welcome Admin");
                     String id = acc.findUserId(userTf.getText(), passText);
+                    this.setVisible(false);
                     AdminUI admin = new AdminUI(u, id);
                     admin.setVisible(true);
                     break;
@@ -195,6 +194,9 @@ public class Login extends javax.swing.JFrame {
                 }
                 case 3 -> {
                     JOptionPane.showMessageDialog(null, "Welcome Assitant");
+                            this.setVisible(false);
+        SalesUI a = new SalesUI();
+        a.setVisible(true);
                     break;
                 }
                 default -> {
