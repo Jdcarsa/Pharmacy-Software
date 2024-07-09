@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/DoctorUI.java</file>
-            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/Crud/Update/UpdateEmployee.java</file>
+            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/Doctor/Options/HistoryPatient.java</file>
             <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/Controller/ControllerHistoryPatient.java</file>
+            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/Doctor/Options/RegisterPatient.java</file>
             <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/Doctor/Options/SearchHistoryPatient.java</file>
-            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/Crud/Search/SearchEmployee.java</file>
-            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/UI/AdminUI.java</file>
+            <file>file:/C:/Users/ideapad330S/Documents/NetBeansProjects/Pharmacy%20Software/src/Controller/ControllerPatient.java</file>
         </group>
     </open-files>
 </project-private>

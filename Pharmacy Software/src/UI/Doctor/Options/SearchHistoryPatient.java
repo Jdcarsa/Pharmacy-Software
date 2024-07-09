@@ -8,12 +8,10 @@ import UI.Crud.Create.*;
 import Controller.Interfaces.IAddDataTFCB;
 import Controller.Interfaces.IController;
 import Controller.Interfaces.IFindData;
-import Model.Employee;
 import Model.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -371,13 +369,9 @@ public class SearchHistoryPatient extends javax.swing.JInternalFrame {
     private void cbIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdActionPerformed
         if (cbId.getSelectedIndex() > 0) {
             String selectedItem = cbId.getSelectedItem().toString();
-            JTextField[] textFields = {nameTF, lastNameTF, emailTF, phoneTF, addressTF};
-            JComboBox[] cbs = {jobCb, sexCb};
-            try {
-                add.addDataTFCB(selectedItem, textFields, cbs);
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(SearchHistoryPatient.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            JTextField[] textFields = {nameTF, };
+           
+
         }
     }//GEN-LAST:event_cbIdActionPerformed
 

@@ -1,11 +1,6 @@
 package UI;
 
-import Controller.Interfaces.IFindData;
-import Controller.Interfaces.IController;
-import Controller.Interfaces.IAddName;
-import Controller.Interfaces.IAddDataTFCB;
-import Controller.Interfaces.IAddDataTF;
-import Controller.Interfaces.IAddDataCalendarTFCB;
+import Controller.Interfaces.*;
 import Controller.*;
 import Controller.AdminFunctions.ControllerDetailsSales;
 import Controller.AdminFunctions.FunctionsContractEmployee;

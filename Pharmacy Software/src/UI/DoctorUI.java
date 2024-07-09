@@ -41,6 +41,7 @@ public class DoctorUI extends javax.swing.JFrame {
         productsBtn = new javax.swing.JButton();
         patientsBtn = new javax.swing.JButton();
         salesBtn1 = new javax.swing.JButton();
+        patientsBtn1 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
 
@@ -104,26 +105,50 @@ public class DoctorUI extends javax.swing.JFrame {
         salesBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salesBtn1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
+        patientsBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        patientsBtn1.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
+        patientsBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        patientsBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-patients-32.png"))); // NOI18N
+        patientsBtn1.setText("History");
+        patientsBtn1.setContentAreaFilled(false);
+        patientsBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        patientsBtn1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        patientsBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientsBtn1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                patientsBtn1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                patientsBtn1MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(productsBtn)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
+                .addComponent(patientsBtn1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(salesBtn1)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(productsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(productsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(patientsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(patientsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salesBtn1))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(salesBtn1)
+                    .addComponent(patientsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/v1033-a-11-b-removebg-preview.png"))); // NOI18N
@@ -165,9 +190,7 @@ public class DoctorUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +243,18 @@ public class DoctorUI extends javax.swing.JFrame {
         productsFrame.setVisible(true);
     }//GEN-LAST:event_productsBtnActionPerformed
 
+    private void patientsBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtn1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientsBtn1MouseClicked
+
+    private void patientsBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtn1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientsBtn1MouseEntered
+
+    private void patientsBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtn1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientsBtn1MouseExited
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,6 +263,7 @@ public class DoctorUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton patientsBtn;
+    private javax.swing.JButton patientsBtn1;
     private javax.swing.JButton productsBtn;
     private javax.swing.JButton salesBtn1;
     // End of variables declaration//GEN-END:variables
