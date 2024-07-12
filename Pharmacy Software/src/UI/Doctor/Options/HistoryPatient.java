@@ -4,6 +4,7 @@
  */
 package UI.Doctor.Options;
 
+import Controller.ControllerHistoryPatient;
 import UI.Crud.Create.*;
 import Controller.Interfaces.IAddDataTFCB;
 import Controller.Interfaces.IController;
@@ -21,17 +22,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HistoryPatient extends javax.swing.JInternalFrame {
 
-    private IController controller;
-    private IAddDataTFCB add;
-    private IFindData find;
-    private Util u;
+      private ControllerHistoryPatient controller;
 
-    public HistoryPatient(Util u, IController controller, IAddDataTFCB add, IFindData find) {
+
+    public HistoryPatient(ControllerHistoryPatient controller) {
         initComponents();
-        this.u = u;
+
         this.controller = controller;
-        this.find = find;
-        this.add = add;
+
         this.setLocation(280, 110);
     }
 

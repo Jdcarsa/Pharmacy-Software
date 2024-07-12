@@ -4,16 +4,15 @@
  */
 package UI.Doctor.Options;
 
-import UI.Crud.Create.*;
-import Controller.ControllerEmployee;
-import Controller.Interfaces.IController;
-import Controller.Interfaces.IFindData;
-import Model.Employee;
+
+import Controller.ControllerHistoryPatient;
+import Model.Patient;
+
 import Model.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -21,17 +20,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegisterPatient extends javax.swing.JInternalFrame {
 
-    private IController controller;
+
     private Util u;
-    private IFindData find;
-           
+    private ControllerHistoryPatient controller;
     
     
-    public RegisterPatient(IController controller, Util u,  IFindData find) {
+    public RegisterPatient(ControllerHistoryPatient controller, Util u) {
         initComponents();
         this.controller = controller;
         this.u = u;
-        this.find = find;
         this.setLocation(280, 110);
     }
 
@@ -226,8 +223,13 @@ public class RegisterPatient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
-
+        Patient pat = new Patient(addressTF.getText(),expDateDT.getDateFormatString(),emailTF.getText()
+                ,u.capitalize(nameTF.getText()),idTF.getText(),phoneTF.getText(),sexCb.getSelectedItem().toString());
+        try {
+            controller.register(pat);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(RegisterPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
 

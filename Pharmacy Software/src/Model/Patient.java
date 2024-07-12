@@ -9,11 +9,11 @@ public class Patient {
     private String email;
     private String idPatient;
     private String namePatient;
-    private int numIdentification;
-    private int phone;
+    private String numIdentification;
+    private String phone;
     private String sex;
 
-    public Patient(String address, String birthdate, String email, String namePatient, int numIdentification, int phone, String sex) {
+    public Patient(String address, String birthdate, String email, String namePatient,String numIdentification, String phone, String sex) {
         this.address = address;
         this.birthdate = birthdate;
         this.email = email;
@@ -63,19 +63,19 @@ public class Patient {
         this.namePatient = namePatient;
     }
 
-    public int getNumIdentification() {
+    public String getNumIdentification() {
         return numIdentification;
     }
 
-    public void setNumIdentification(int numIdentification) {
+    public void setNumIdentification(String numIdentification) {
         this.numIdentification = numIdentification;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

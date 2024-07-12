@@ -4,14 +4,11 @@
  */
 package UI.Doctor.Options;
 
-import UI.Crud.Create.*;
-import Controller.Interfaces.IAddDataTFCB;
-import Controller.Interfaces.IController;
-import Controller.Interfaces.IFindData;
-import Model.Util;
+import Controller.ControllerHistoryPatient;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,20 +18,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchHistoryPatient extends javax.swing.JInternalFrame {
 
-    private IController controller;
-    private IAddDataTFCB add;
-    private IFindData find;
-    private Util u;
+    private ControllerHistoryPatient controller;
 
-    public SearchHistoryPatient(Util u, IController controller, IAddDataTFCB add, IFindData find) {
+    public SearchHistoryPatient(ControllerHistoryPatient controller) {
         initComponents();
-        this.u = u;
+
         this.controller = controller;
-        this.find = find;
-        this.add = add;
+
         this.setLocation(280, 110);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -345,7 +337,7 @@ public class SearchHistoryPatient extends javax.swing.JInternalFrame {
         this.jTable1.setEnabled(false);
         DefaultTableModel model = new DefaultTableModel();
         try {
-            find.getAll(model);
+            controller.getAll(model);
             cbId.addItem("Select an Hisotry Code");
             controller.addIdCb(cbId);
             this.jTable1.setModel(model);
@@ -355,28 +347,24 @@ public class SearchHistoryPatient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        DefaultTableModel model = new DefaultTableModel();
-        try {
-            //   controller.update(emp);
-            find.getAll(model);
-            this.jTable1.setModel(model);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(RegisterEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        if (cbId.getSelectedIndex() > 0) {
+            String selectedItem = cbId.getSelectedItem().toString();
+            JTextField[] textFields = {nameTF, jTextField1};
+            JTextArea[] textAreas = {jTextArea1, jTextArea2, jTextArea3, jTextArea4, jTextArea5, jTextArea6};
+            try {
+                controller.addDataTFTA(selectedItem, textFields, textAreas);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(SearchHistoryPatient.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdActionPerformed
-        if (cbId.getSelectedIndex() > 0) {
-            String selectedItem = cbId.getSelectedItem().toString();
-            JTextField[] textFields = {nameTF, };
-           
 
-        }
     }//GEN-LAST:event_cbIdActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_searchActionPerformed
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
@@ -384,7 +372,7 @@ public class SearchHistoryPatient extends javax.swing.JInternalFrame {
         DefaultTableModel model = new DefaultTableModel();
         try {
             this.jTable1.setModel(model);
-            find.search(model, this.search.getText().trim());
+            controller.search(model, this.search.getText().trim());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SearchHistoryPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
