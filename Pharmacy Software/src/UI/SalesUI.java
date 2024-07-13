@@ -4,10 +4,14 @@
  */
 package UI;
 
+import Controller.ControllerHistoryPatient;
+import Controller.ControllerProduct;
+import Controller.Interfaces.IFindData;
+import Model.Util;
 import UI.Crud.Search.SearchProducts;
+import UI.Doctor.Options.RegisterPatient;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-
 
 /**
  *
@@ -16,14 +20,16 @@ import javax.swing.ImageIcon;
 public class SalesUI extends javax.swing.JFrame {
 
     public boolean existsPanel = false;
-    private SalesUI emp ;
+    private SalesUI emp;
+    private IFindData find;
+
     public SalesUI() {
         initComponents();
-         this.setExtendedState(MAXIMIZED_BOTH);
-         ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
-                 + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
-         this.setIconImage(icon.getImage());
-         this.emp = this;
+        this.setExtendedState(MAXIMIZED_BOTH);
+        ImageIcon icon = new ImageIcon("C:\\Users\\ideapad330S\\Documents\\NetBeansProjects"
+                + "\\Pharmacy Software\\src\\UI\\Images\\Icono.png");
+        this.setIconImage(icon.getImage());
+        this.emp = this;
     }
 
     /**
@@ -41,6 +47,7 @@ public class SalesUI extends javax.swing.JFrame {
         patientsBtn = new javax.swing.JButton();
         salesBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +74,11 @@ public class SalesUI extends javax.swing.JFrame {
                 productsBtnMouseExited(evt);
             }
         });
+        productsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productsBtnActionPerformed(evt);
+            }
+        });
 
         patientsBtn.setBackground(new java.awt.Color(255, 255, 255));
         patientsBtn.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
@@ -85,6 +97,11 @@ public class SalesUI extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 patientsBtnMouseExited(evt);
+            }
+        });
+        patientsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientsBtnActionPerformed(evt);
             }
         });
 
@@ -130,11 +147,23 @@ public class SalesUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/v1033-a-11-b-removebg-preview.png"))); // NOI18N
 
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 313, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(110, Short.MAX_VALUE)
@@ -145,7 +174,8 @@ public class SalesUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 319, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane1))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(92, Short.MAX_VALUE)
@@ -170,36 +200,24 @@ public class SalesUI extends javax.swing.JFrame {
     private void productsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productsBtnMouseClicked
 
         if (!existsPanel) {
-             SearchProducts productsFrame = new SearchProducts(jLabel1,emp );
+            SearchProducts productsFrame = new SearchProducts(jLabel1, emp);
             jPanel2.add(productsFrame);
             productsFrame.setVisible(true);
             existsPanel = true;
             if (productsFrame.isShowing()) {
                 jLabel1.setVisible(false);
-            } 
-        } 
+            }
+        }
     }//GEN-LAST:event_productsBtnMouseClicked
 
     private void productsBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productsBtnMouseEntered
-      productsBtn.setForeground(Color.lightGray);
-       
+        productsBtn.setForeground(Color.lightGray);
+
     }//GEN-LAST:event_productsBtnMouseEntered
 
     private void productsBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productsBtnMouseExited
-      productsBtn.setForeground(Color.white);
+        productsBtn.setForeground(Color.white);
     }//GEN-LAST:event_productsBtnMouseExited
-
-    private void patientsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_patientsBtnMouseClicked
-
-    private void patientsBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseEntered
-   patientsBtn.setForeground(Color.lightGray);
-    }//GEN-LAST:event_patientsBtnMouseEntered
-
-    private void patientsBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseExited
-       patientsBtn.setForeground(Color.white);
-    }//GEN-LAST:event_patientsBtnMouseExited
 
     private void salesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesBtnMouseClicked
         // TODO add your handling code here:
@@ -210,12 +228,39 @@ public class SalesUI extends javax.swing.JFrame {
     }//GEN-LAST:event_salesBtnMouseEntered
 
     private void salesBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesBtnMouseExited
-      salesBtn.setForeground(Color.white);
+        salesBtn.setForeground(Color.white);
     }//GEN-LAST:event_salesBtnMouseExited
 
+    private void patientsBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseExited
+        patientsBtn.setForeground(Color.white);
+    }//GEN-LAST:event_patientsBtnMouseExited
+
+    private void patientsBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseEntered
+        patientsBtn.setForeground(Color.lightGray);
+    }//GEN-LAST:event_patientsBtnMouseEntered
+
+    private void patientsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientsBtnMouseClicked
+
+    private void patientsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientsBtnActionPerformed
+        ControllerHistoryPatient controller = new ControllerHistoryPatient();
+        Util u = new Util();
+        RegisterPatient registerFrame = new RegisterPatient(controller, u);
+        this.jDesktopPane1.add(registerFrame);
+        registerFrame.setVisible(true);
+    }//GEN-LAST:event_patientsBtnActionPerformed
+
+    private void productsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productsBtnActionPerformed
+        find = new ControllerProduct();
+        SearchProducts productsFrame = new SearchProducts(find);
+        this.jDesktopPane1.add(productsFrame);
+        productsFrame.setVisible(true);
+    }//GEN-LAST:event_productsBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -9,6 +9,7 @@ import UI.Crud.Create.*;
 import Controller.Interfaces.IAddDataTFCB;
 import Controller.Interfaces.IController;
 import Controller.Interfaces.IFindData;
+import Model.ClinicalHistory;
 import Model.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -264,7 +265,13 @@ public class HistoryPatient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        ClinicalHistory clinic = new ClinicalHistory(jTextArea4.getText(),jTextField1.getText()
+                ,jTextArea6.getText(),jTextArea5.getText(),jTextField2.getText(),jTextArea3.getText(),jTextArea1.getText(),jTextArea2.getText());
+          try {
+              controller.register(clinic);
+          } catch (ClassNotFoundException | SQLException ex) {
+              Logger.getLogger(HistoryPatient.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

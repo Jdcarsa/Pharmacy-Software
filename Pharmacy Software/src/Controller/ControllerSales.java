@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Controller.Interfaces.IController;
@@ -8,40 +7,40 @@ import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
+public class ControllerSales {
 
-public class ControllerSales implements  IController , IFindData{
-
-    @Override
     public void addIdCb(JComboBox cb) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        executeSmtDb exc = new executeSmtDb();
+        exc.executeSmtSelect("Select idProduct from pharmacy.Product where statusProduct like 'Active' ", "idProduct", cb);
     }
 
-    @Override
-    public void register(Object o) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    @Override
-    public void disable(String id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    @Override
-    public void update(Object o) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void getAll(DefaultTableModel model) throws ClassNotFoundException, SQLException {
-               executeSmtDb exc = new executeSmtDb();
+        executeSmtDb exc = new executeSmtDb();
         exc.executeSmtSelect("SELECT * FROM pharmacy.detailsales JOIN pharmacy.product"
                 + "ON pharmacy.detailsales.idProduct = pharmacy.product.idProduct GROUP BY pharmacy.detailsales.idSalesCheck", model);
 
     }
 
-    @Override
     public void search(DefaultTableModel model, String name) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        executeSmtDb exc = new executeSmtDb();
+        exc.executeSmtSelect("SELECT * FROM pharmacy.product_pre_lab"
+                + " where name LIKE " + "'%" + name + "%'", model);
     }
-    
+
+    public String find(String cod) throws ClassNotFoundException, SQLException {
+        executeSmtDb exc = new executeSmtDb();
+        String name = exc.executeSmtSelect("SELECT descriptionProduct FROM pharmacy.Product where statusProduct like 'Active' "
+                + "and idProducto = " + "'" + cod + "'", "descriptionProduct");
+        return name;
+    }
+
+    public String findPrice(String cod) throws ClassNotFoundException, SQLException {
+        executeSmtDb exc = new executeSmtDb();
+        String price = exc.executeSmtSelect("SELECT salePrice FROM pharmacy.Product where statusProduct like 'Active' "
+                + "and idProducto = " + "'" + cod + "'", "salePrice");
+        return price;
+    }
+
 }
