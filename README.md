@@ -1,4 +1,4 @@
-```markdown
+
 # Pharmacy Software
 
 **Pharmacy Software** es una aplicación de escritorio desarrollada en Java para la gestión eficiente de farmacias. Permite administrar inventario, ventas, productos y operaciones diarias, facilitando el control y la organización del negocio farmacéutico.
